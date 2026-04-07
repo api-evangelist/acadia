@@ -5,9 +5,9 @@ name: Acadia
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Workforce
-  - Training
   - Connected Worker
+  - Training
+  - Workforce
 description: >-
   Acadia is a Connected Worker Platform that provides a highly intuitive
   software platform delivering critical information to employees on any
@@ -20,8 +20,8 @@ apis:
   - aid: acadia:acadia-api
     name: Acadia API
     tags:
-      - Workforce
       - Training
+      - Workforce
     humanURL: https://www.acadia-software.com/
     properties:
       - url: https://www.acadia-software.com/
