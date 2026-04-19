@@ -1,0 +1,7 @@
+{
+  "id": "role-ops-001",
+  "name": "Machine Operator",
+  "department": "Production",
+  "requiredTrainings": 12,
+  "completionRate": 78
+}

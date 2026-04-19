@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-structure/acadia-role-list-structure.json",
+  "name": "RoleList",
+  "description": "Paginated list of roles",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Role"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "example": 8
+    },
+    "page": {
+      "type": "int32",
+      "example": 1
+    },
+    "limit": {
+      "type": "int32",
+      "example": 25
+    }
+  }
+}

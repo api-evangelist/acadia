@@ -1,0 +1,11 @@
+{
+  "id": "wi-abc123",
+  "title": "Machine Startup Procedure",
+  "status": "published",
+  "category": "operations",
+  "version": 3,
+  "description": "Standard procedure for starting production machinery safely",
+  "steps": [],
+  "createdAt": "2026-01-15T09:00:00Z",
+  "updatedAt": "2026-03-01T14:30:00Z"
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-schema/acadia-quiz-schema.json",
+  "title": "Quiz",
+  "description": "A quiz or assessment",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Quiz identifier",
+      "example": "quiz-jkl012"
+    },
+    "title": {
+      "type": "string",
+      "description": "Quiz title",
+      "example": "Machine Safety Knowledge Check"
+    },
+    "status": {
+      "type": "string",
+      "description": "Quiz status",
+      "example": "active",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "questionCount": {
+      "type": "integer",
+      "description": "Number of questions in the quiz",
+      "example": 10
+    },
+    "passingScore": {
+      "type": "integer",
+      "description": "Minimum passing score percentage",
+      "example": 80
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Quiz creation timestamp",
+      "example": "2026-01-20T10:00:00Z"
+    }
+  }
+}

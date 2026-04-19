@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-schema/acadia-employee-skills-matrix-schema.json",
+  "title": "EmployeeSkillsMatrix",
+  "description": "Complete skills matrix for an employee",
+  "type": "object",
+  "properties": {
+    "employeeId": {
+      "type": "string",
+      "description": "Employee identifier",
+      "example": "emp-ghi789"
+    },
+    "employeeName": {
+      "type": "string",
+      "description": "Employee name",
+      "example": "Jane Smith"
+    },
+    "role": {
+      "type": "string",
+      "description": "Current job role",
+      "example": "Machine Operator"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SkillRecord"
+      }
+    },
+    "overallCompletion": {
+      "type": "integer",
+      "description": "Overall skill completion percentage",
+      "example": 87
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-schema/acadia-employee-schema.json",
+  "title": "Employee",
+  "description": "An employee in the organization",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique employee identifier",
+      "example": "emp-ghi789"
+    },
+    "name": {
+      "type": "string",
+      "description": "Employee full name",
+      "example": "Jane Smith"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Employee email address",
+      "example": "jsmith@example.com"
+    },
+    "department": {
+      "type": "string",
+      "description": "Department name",
+      "example": "Production"
+    },
+    "role": {
+      "type": "string",
+      "description": "Job role name",
+      "example": "Machine Operator"
+    },
+    "trainingCompletion": {
+      "type": "integer",
+      "description": "Overall training completion percentage",
+      "example": 87
+    }
+  }
+}

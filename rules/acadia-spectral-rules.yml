@@ -1,0 +1,243 @@
+rules:
+
+  # INFO / METADATA
+  info-title-acadia-prefix:
+    description: Info title must start with "Acadia"
+    severity: error
+    given: '$.info'
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: '^Acadia'
+
+  info-description-required:
+    description: Info description must be present
+    severity: error
+    given: '$.info'
+    then:
+      field: description
+      function: truthy
+
+  info-version-required:
+    description: Info version must be present
+    severity: error
+    given: '$.info'
+    then:
+      field: version
+      function: truthy
+
+  # OPENAPI VERSION
+  openapi-version-3:
+    description: Must use OpenAPI 3.0.x
+    severity: error
+    given: '$'
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: '^3\.0\.'
+
+  # SERVERS
+  servers-https-required:
+    description: Server URLs must use HTTPS
+    severity: error
+    given: '$.servers[*]'
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  # PATHS
+  paths-kebab-case:
+    description: Path segments must use kebab-case
+    severity: warn
+    given: '$.paths'
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: '^(\/[a-z0-9_\-\{\}]*)*$'
+
+  paths-no-trailing-slash:
+    description: Paths must not have trailing slashes
+    severity: warn
+    given: '$.paths'
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        notMatch: '.+\/$'
+
+  # OPERATIONS
+  operation-summary-prefix:
+    description: Operation summaries must start with "Acadia"
+    severity: warn
+    given: '$.paths[*][get,post,put,patch,delete]'
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: '^Acadia'
+
+  operation-description-required:
+    description: Every operation must have a description
+    severity: error
+    given: '$.paths[*][get,post,put,patch,delete]'
+    then:
+      field: description
+      function: truthy
+
+  operation-id-required:
+    description: Every operation must have an operationId
+    severity: error
+    given: '$.paths[*][get,post,put,patch,delete]'
+    then:
+      field: operationId
+      function: truthy
+
+  operation-id-camel-case:
+    description: operationId must use camelCase
+    severity: warn
+    given: '$.paths[*][get,post,put,patch,delete]'
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
+
+  operation-tags-required:
+    description: Every operation must have tags
+    severity: error
+    given: '$.paths[*][get,post,put,patch,delete]'
+    then:
+      field: tags
+      function: truthy
+
+  # PARAMETERS
+  parameter-description-required:
+    description: Parameters must have descriptions
+    severity: error
+    given: '$.paths[*][get,post,put,patch,delete].parameters[*]'
+    then:
+      field: description
+      function: truthy
+
+  parameter-pagination-page:
+    description: List endpoints should support page parameter
+    severity: info
+    given: '$.paths[*].get.parameters[?(@.name == "page")]'
+    then:
+      field: schema.type
+      function: enumeration
+      functionOptions:
+        values:
+          - integer
+
+  parameter-pagination-limit:
+    description: List endpoints should support limit parameter
+    severity: info
+    given: '$.paths[*].get.parameters[?(@.name == "limit")]'
+    then:
+      field: schema.type
+      function: enumeration
+      functionOptions:
+        values:
+          - integer
+
+  # RESPONSES
+  response-success-required:
+    description: Every operation must have a 2xx success response
+    severity: error
+    given: '$.paths[*][get,post,put,patch,delete].responses'
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['200']
+            - required: ['201']
+            - required: ['204']
+
+  response-401-required:
+    description: Protected operations should document 401 response
+    severity: warn
+    given: '$.paths[*][get,post,put,patch,delete].responses'
+    then:
+      field: '401'
+      function: truthy
+
+  response-description-required:
+    description: All responses must have descriptions
+    severity: error
+    given: '$.paths[*][get,post,put,patch,delete].responses[*]'
+    then:
+      field: description
+      function: truthy
+
+  # SCHEMAS
+  schema-description-required:
+    description: Component schemas must have descriptions
+    severity: warn
+    given: '$.components.schemas[*]'
+    then:
+      field: description
+      function: truthy
+
+  schema-property-description:
+    description: Schema properties should have descriptions
+    severity: info
+    given: '$.components.schemas[*].properties[*]'
+    then:
+      field: description
+      function: truthy
+
+  schema-property-example:
+    description: Schema properties should have example values
+    severity: info
+    given: '$.components.schemas[*].properties[*]'
+    then:
+      field: example
+      function: truthy
+
+  # SECURITY
+  security-schemes-required:
+    description: Security schemes must be defined
+    severity: error
+    given: '$'
+    then:
+      field: components.securitySchemes
+      function: truthy
+
+  security-bearer-jwt:
+    description: Acadia uses Bearer JWT authentication
+    severity: warn
+    given: '$.components.securitySchemes[*][?(@.type == "http")]'
+    then:
+      field: scheme
+      function: enumeration
+      functionOptions:
+        values:
+          - bearer
+
+  # HTTP METHOD CONVENTIONS
+  get-no-request-body:
+    description: GET operations must not have a request body
+    severity: error
+    given: '$.paths[*].get'
+    then:
+      field: requestBody
+      function: falsy
+
+  delete-returns-200-or-204:
+    description: DELETE operations should return 200 or 204
+    severity: warn
+    given: '$.paths[*].delete.responses'
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['200']
+            - required: ['204']

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-structure/acadia-work-instruction-list-structure.json",
+  "name": "WorkInstructionList",
+  "description": "Paginated list of work instructions",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WorkInstruction"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of work instructions",
+      "example": 42
+    },
+    "page": {
+      "type": "int32",
+      "description": "Current page number",
+      "example": 1
+    },
+    "limit": {
+      "type": "int32",
+      "description": "Results per page",
+      "example": 25
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-structure/acadia-quiz-list-structure.json",
+  "name": "QuizList",
+  "description": "Paginated list of quizzes",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Quiz"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "example": 15
+    },
+    "page": {
+      "type": "int32",
+      "example": 1
+    },
+    "limit": {
+      "type": "int32",
+      "example": 25
+    }
+  }
+}

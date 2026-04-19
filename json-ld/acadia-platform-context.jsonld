@@ -1,0 +1,118 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "acadia": "https://acadia-software.com/schema/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "WorkInstruction": "acadia:WorkInstruction",
+    "id": {
+      "@id": "acadia:id",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "acadia:title",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "acadia:status",
+      "@type": "xsd:string"
+    },
+    "category": {
+      "@id": "acadia:category",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "acadia:version",
+      "@type": "xsd:integer"
+    },
+    "description": "schema:description",
+    "steps": {
+      "@id": "acadia:steps",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "acadia:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "acadia:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "WorkInstructionStep": "acadia:WorkInstructionStep",
+    "order": {
+      "@id": "acadia:order",
+      "@type": "xsd:integer"
+    },
+    "Employee": "acadia:Employee",
+    "name": "schema:name",
+    "email": "schema:email",
+    "department": {
+      "@id": "acadia:department",
+      "@type": "xsd:string"
+    },
+    "role": {
+      "@id": "acadia:role",
+      "@type": "xsd:string"
+    },
+    "trainingCompletion": {
+      "@id": "acadia:trainingCompletion",
+      "@type": "xsd:integer"
+    },
+    "SkillRecord": "acadia:SkillRecord",
+    "skillId": {
+      "@id": "acadia:skillId",
+      "@type": "xsd:string"
+    },
+    "required": {
+      "@id": "acadia:required",
+      "@type": "xsd:boolean"
+    },
+    "completed": {
+      "@id": "acadia:completed",
+      "@type": "xsd:boolean"
+    },
+    "completedAt": {
+      "@id": "acadia:completedAt",
+      "@type": "xsd:dateTime"
+    },
+    "score": {
+      "@id": "acadia:score",
+      "@type": "xsd:integer"
+    },
+    "EmployeeSkillsMatrix": "acadia:EmployeeSkillsMatrix",
+    "employeeId": {
+      "@id": "acadia:employeeId",
+      "@type": "xsd:string"
+    },
+    "employeeName": {
+      "@id": "acadia:employeeName",
+      "@type": "xsd:string"
+    },
+    "skills": {
+      "@id": "acadia:skills",
+      "@type": "xsd:string"
+    },
+    "overallCompletion": {
+      "@id": "acadia:overallCompletion",
+      "@type": "xsd:integer"
+    },
+    "Quiz": "acadia:Quiz",
+    "questionCount": {
+      "@id": "acadia:questionCount",
+      "@type": "xsd:integer"
+    },
+    "passingScore": {
+      "@id": "acadia:passingScore",
+      "@type": "xsd:integer"
+    },
+    "Role": "acadia:Role",
+    "requiredTrainings": {
+      "@id": "acadia:requiredTrainings",
+      "@type": "xsd:integer"
+    },
+    "completionRate": {
+      "@id": "acadia:completionRate",
+      "@type": "xsd:integer"
+    }
+  }
+}

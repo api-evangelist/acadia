@@ -1,0 +1,210 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Acadia"
+  description: "Taxonomy of Acadia Connected Worker Platform covering workforce development, digital work instructions, skills management, and training operations"
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: Acadia Platform API
+      namespace: acadia
+      version: "1.0.0"
+      baseUrl: https://api.acadia-software.com/v1
+      status: active
+
+  resources:
+    - name: work-instructions
+      apis:
+        - acadia
+      actions:
+        - list
+        - get
+        - create
+    - name: employees
+      apis:
+        - acadia
+      actions:
+        - list
+        - get
+    - name: skills
+      apis:
+        - acadia
+      actions:
+        - get
+    - name: quizzes
+      apis:
+        - acadia
+      actions:
+        - list
+        - get
+    - name: evaluations
+      apis:
+        - acadia
+      actions:
+        - list
+        - get
+    - name: roles
+      apis:
+        - acadia
+      actions:
+        - list
+        - get
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+      description: List all resources of a given type with pagination
+    - name: get
+      httpMethod: GET
+      pattern: read
+      description: Get details for a specific resource by ID
+    - name: create
+      httpMethod: POST
+      pattern: write
+      description: Create a new resource
+
+  parameters:
+    identifiers:
+      - name: id
+        description: Unique resource identifier
+        type: string
+    filters:
+      - name: status
+        description: Filter by publication or active status
+        type: string
+      - name: category
+        description: Filter by category or department
+        type: string
+      - name: role_id
+        description: Filter by job role identifier
+        type: string
+      - name: department
+        description: Filter by department name
+        type: string
+    pagination:
+      - name: page
+        description: Page number for paginated results
+        type: integer
+      - name: limit
+        description: Number of results per page (max 100)
+        type: integer
+
+  enums:
+    work_instruction_status:
+      - draft
+      - published
+      - archived
+    quiz_status:
+      - active
+      - inactive
+
+  authentication:
+    schemes:
+      - type: bearer
+        format: JWT
+        description: JWT Bearer token passed in Authorization header
+
+capability:
+  workflows:
+    - name: Workforce Development
+      file: capabilities/workforce-development.yaml
+      description: Digital work instructions, employee skills, quizzes, and role management
+      apis:
+        - acadia
+      toolCount: 6
+      personas:
+        - hr-manager
+        - training-coordinator
+        - operations-manager
+
+  personas:
+    - id: hr-manager
+      name: HR Manager
+      description: HR professional managing employee training records, skills matrices, and role requirements
+      workflows:
+        - Workforce Development
+    - id: training-coordinator
+      name: Training Coordinator
+      description: Professional responsible for creating and assigning work instructions and quizzes
+      workflows:
+        - Workforce Development
+    - id: operations-manager
+      name: Operations Manager
+      description: Manager monitoring team skill gaps, compliance, and training completion rates
+      workflows:
+        - Workforce Development
+
+  domains:
+    - name: Workforce Training
+      description: End-to-end employee training management from work instructions to skill validation
+      resources:
+        - work-instructions
+        - quizzes
+        - evaluations
+      workflows:
+        - Workforce Development
+    - name: Skills Management
+      description: Tracking and managing employee skills, roles, and career development
+      resources:
+        - skills
+        - roles
+        - employees
+      workflows:
+        - Workforce Development
+
+  namespaces:
+    consumed:
+      - acadia
+    rest:
+      - workforce-development-api (port 8080)
+    mcp:
+      - workforce-development-mcp (port 9090)
+
+  binds:
+    - ACADIA_API_TOKEN
+
+crossReference:
+  - resource: work-instructions
+    operations:
+      - listWorkInstructions
+      - getWorkInstruction
+      - createWorkInstruction
+    workflows:
+      - Workforce Development
+    personas:
+      - training-coordinator
+      - operations-manager
+  - resource: employees
+    operations:
+      - listEmployees
+    workflows:
+      - Workforce Development
+    personas:
+      - hr-manager
+      - operations-manager
+  - resource: skills
+    operations:
+      - getEmployeeSkills
+    workflows:
+      - Workforce Development
+    personas:
+      - hr-manager
+      - operations-manager
+  - resource: quizzes
+    operations:
+      - listQuizzes
+    workflows:
+      - Workforce Development
+    personas:
+      - training-coordinator
+  - resource: roles
+    operations:
+      - listRoles
+    workflows:
+      - Workforce Development
+    personas:
+      - hr-manager
+      - operations-manager

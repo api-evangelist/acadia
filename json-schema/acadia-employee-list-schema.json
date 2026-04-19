@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-schema/acadia-employee-list-schema.json",
+  "title": "EmployeeList",
+  "description": "Paginated list of employees",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Employee"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "example": 150
+    },
+    "page": {
+      "type": "integer",
+      "example": 1
+    },
+    "limit": {
+      "type": "integer",
+      "example": 25
+    }
+  }
+}

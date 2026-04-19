@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-structure/acadia-role-structure.json",
+  "name": "Role",
+  "description": "A job role with training requirements",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Role identifier",
+      "example": "role-ops-001"
+    },
+    "name": {
+      "type": "string",
+      "description": "Role name",
+      "example": "Machine Operator"
+    },
+    "department": {
+      "type": "string",
+      "description": "Department the role belongs to",
+      "example": "Production"
+    },
+    "requiredTrainings": {
+      "type": "int32",
+      "description": "Number of required training completions for the role",
+      "example": 12
+    },
+    "completionRate": {
+      "type": "int32",
+      "description": "Average completion rate across employees in this role",
+      "example": 78
+    }
+  }
+}

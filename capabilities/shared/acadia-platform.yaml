@@ -1,0 +1,107 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Acadia Platform API"
+  description: "Acadia Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, and employee training management."
+  tags:
+    - Acadia
+    - Connected Worker
+    - Workforce Development
+    - Training
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      ACADIA_API_TOKEN: ACADIA_API_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: acadia
+      baseUri: https://api.acadia-software.com/v1
+      description: "Acadia Platform REST API"
+      authentication:
+        type: bearer
+        token: "{{env.ACADIA_API_TOKEN}}"
+      resources:
+        - name: work-instructions
+          path: /work-instructions
+          description: Digital work instruction management
+          operations:
+            - name: listWorkInstructions
+              method: GET
+              description: List all digital work instructions
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: createWorkInstruction
+              method: POST
+              description: Create a new work instruction
+              body:
+                type: json
+                data:
+                  title: "{{tools.title}}"
+                  category: "{{tools.category}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: employees
+          path: /employees
+          description: Employee management
+          operations:
+            - name: listEmployees
+              method: GET
+              description: List all employees
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: employee-skills
+          path: /employees/{id}/skills
+          description: Employee skills matrix
+          operations:
+            - name: getEmployeeSkills
+              method: GET
+              description: Get skills matrix for an employee
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Employee identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: quizzes
+          path: /quizzes
+          description: Quiz and assessment management
+          operations:
+            - name: listQuizzes
+              method: GET
+              description: List all quizzes
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: roles
+          path: /roles
+          description: Job role management
+          operations:
+            - name: listRoles
+              method: GET
+              description: List all job roles
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

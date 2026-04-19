@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-schema/acadia-skill-record-schema.json",
+  "title": "SkillRecord",
+  "description": "A skill record in the employee skills matrix",
+  "type": "object",
+  "properties": {
+    "skillId": {
+      "type": "string",
+      "description": "Unique skill identifier",
+      "example": "skill-001"
+    },
+    "name": {
+      "type": "string",
+      "description": "Skill name",
+      "example": "Machine Startup"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether this skill is required for the role",
+      "example": true
+    },
+    "completed": {
+      "type": "boolean",
+      "description": "Whether the employee has completed this skill",
+      "example": true
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the skill was completed",
+      "example": "2026-02-10T08:00:00Z"
+    },
+    "score": {
+      "type": "integer",
+      "description": "Score achieved (0-100)",
+      "example": 95
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-schema/acadia-work-instruction-schema.json",
+  "title": "WorkInstruction",
+  "description": "A digital work instruction document",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique work instruction identifier",
+      "example": "wi-abc123"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the work instruction",
+      "example": "Machine Startup Procedure"
+    },
+    "status": {
+      "type": "string",
+      "description": "Publication status",
+      "example": "published",
+      "enum": [
+        "draft",
+        "published",
+        "archived"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Category or department the instruction belongs to",
+      "example": "operations"
+    },
+    "version": {
+      "type": "integer",
+      "description": "Version number of the work instruction",
+      "example": 3
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the work instruction purpose",
+      "example": "Standard procedure for starting production machinery safely"
+    },
+    "steps": {
+      "type": "array",
+      "description": "Ordered steps in the work instruction",
+      "items": {
+        "$ref": "#/components/schemas/WorkInstructionStep"
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the instruction was created",
+      "example": "2026-01-15T09:00:00Z"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of last update",
+      "example": "2026-03-01T14:30:00Z"
+    }
+  }
+}

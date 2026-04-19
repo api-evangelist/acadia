@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/json-structure/acadia-work-instruction-step-structure.json",
+  "name": "WorkInstructionStep",
+  "description": "A single step within a work instruction",
+  "type": "object",
+  "properties": {
+    "order": {
+      "type": "int32",
+      "description": "Step sequence number",
+      "example": 1
+    },
+    "title": {
+      "type": "string",
+      "description": "Step title",
+      "example": "Inspect Machine"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the step",
+      "example": "Visually inspect the machine for defects or hazards"
+    }
+  }
+}
