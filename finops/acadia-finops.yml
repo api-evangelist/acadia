@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,10 +9,11 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Acadia
 providerId: acadia
-publisherName: Acadia
-serviceCategory: API
+publisherName: Epicor Software Corporation
+serviceCategory: Connected Worker / Workforce Enablement SaaS
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Connected Worker
   - Knowledge Management
@@ -20,115 +22,65 @@ tags:
   - Training
   - Workforce Development
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Acadia API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: FOCUS-aligned FinOps scaffold for Acadia (now an Epicor product). Pricing is enterprise
+  quote-based, so meters and FOCUS columns reflect a typical SaaS seat-and-tenant invoice rather than
+  per-call usage.
+sources:
+  - https://www.acadia-software.com/
+notes: No public pricing or billing API. The FinOps shape below assumes a SaaS subscription with seat-based
+  metering, which is the canonical Acadia / Epicor commercial model; specific dollar amounts and committed-use
+  terms must be reconciled from the customer's order form.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
+    - Usage
 focusColumns:
   ServiceName: Acadia
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Connected Worker / Workforce Enablement SaaS
   ProviderName: Acadia
-  PublisherName: Acadia
-  InvoiceIssuerName: Acadia
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Epicor Software Corporation
+  InvoiceIssuerName: Epicor Software Corporation
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
+  - name: named_user_seat
+    description: Named-user seat assigned to a frontline worker, supervisor, or admin.
+    unit: seat
+    aggregation: max
+    dimensions:
+      - role
+      - site
+      - business_unit
+  - name: tenant_subscription
+    description: Annual platform subscription per tenant.
+    unit: year
+    aggregation: sum
+    dimensions:
+      - environment
+  - name: api_request
+    description: Acadia Platform API call (when the API add-on is contracted).
     unit: request
     aggregation: sum
     dimensions:
-      - api
       - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Acadia Platform API
-    baseURL: https://api.acadia-software.com/v1
-    tags:
-      - Connected Worker
-      - Knowledge Management
-      - Training
-      - Workforce Development
-    serviceName: Acadia Platform API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - integration
+principles:
+  - name: Visibility
+    description: Acadia / Epicor invoices are line-item PDFs; pull seat counts and integration add-ons
+      from the order form into the cost dataset since there is no public usage API.
+  - name: Allocation
+    description: Allocate seats to the consuming site, plant, or business unit; tag platform-API calls
+      to the integrating system (ERP, HRIS, LMS).
+  - name: Optimization
+    description: Reconcile named-user seats annually against active workforce; reclaim seats from churned
+      employees and align tier (read-only vs authoring) to actual usage.
+  - name: Accountability
+    description: Operations leadership at the consuming site owns seat counts and renewal scope; integrations
+      are owned by the IT integration lead.
 maintainers:
   - FN: Kin Lane
-    email: kin@apievangelist.com
+    email: info@apievangelist.com
