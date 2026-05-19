@@ -1,0 +1,79 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Acadia - Platform API — Quizzes
+  description: 'Acadia - Platform API — Quizzes. 1 operations. Lead operation: Acadia List Quizzes. Self-contained Naftiko
+    capability covering one Acadia business surface.'
+  tags:
+  - Acadia
+  - Quizzes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ACADIA_API_KEY: ACADIA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-quizzes
+    baseUri: https://api.acadia-software.com/v1
+    description: Acadia - Platform API — Quizzes business capability. Self-contained, no shared references.
+    resources:
+    - name: quizzes
+      path: /quizzes
+      operations:
+      - name: listquizzes
+        method: GET
+        description: Acadia List Quizzes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by quiz status (active, inactive).
+    authentication:
+      type: bearer
+      token: '{{env.ACADIA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: platform-quizzes-rest
+    port: 8080
+    description: REST adapter for Acadia - Platform API — Quizzes. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/quizzes
+      name: quizzes
+      description: REST surface for quizzes.
+      operations:
+      - method: GET
+        name: listquizzes
+        description: Acadia List Quizzes
+        call: platform-quizzes.listquizzes
+        with:
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-quizzes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Acadia - Platform API — Quizzes. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: acadia-list-quizzes
+      description: Acadia List Quizzes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-quizzes.listquizzes
+      with:
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.

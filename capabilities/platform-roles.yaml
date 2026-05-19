@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Acadia - Platform API — Roles
+  description: 'Acadia - Platform API — Roles. 1 operations. Lead operation: Acadia List Roles. Self-contained Naftiko capability
+    covering one Acadia business surface.'
+  tags:
+  - Acadia
+  - Roles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ACADIA_API_KEY: ACADIA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-roles
+    baseUri: https://api.acadia-software.com/v1
+    description: Acadia - Platform API — Roles business capability. Self-contained, no shared references.
+    resources:
+    - name: roles
+      path: /roles
+      operations:
+      - name: listroles
+        method: GET
+        description: Acadia List Roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ACADIA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: platform-roles-rest
+    port: 8080
+    description: REST adapter for Acadia - Platform API — Roles. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/roles
+      name: roles
+      description: REST surface for roles.
+      operations:
+      - method: GET
+        name: listroles
+        description: Acadia List Roles
+        call: platform-roles.listroles
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-roles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Acadia - Platform API — Roles. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: acadia-list-roles
+      description: Acadia List Roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-roles.listroles
+      outputParameters:
+      - type: object
+        mapping: $.
