@@ -2,20 +2,13 @@
   "repo": "acadia",
   "feeds": [
     {
-      "source": "https://www.acadia-software.com/feed/",
+      "source": "https://www.acadia-software.com/blog/",
       "feed_url": "https://www.acadia-software.com/feed/",
-      "title": "",
+      "title": "Acadia",
       "saved": 0,
       "method": "feed"
-    },
-    {
-      "source": "https://www.acadia-software.com/",
-      "feed_url": "https://www.acadia-software.com/sample-page/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "discovered"
     }
   ],
   "post_count": 1,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-21T17:00:00Z"
 }
