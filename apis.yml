@@ -35,16 +35,16 @@ apis:
   - url: json-schema/acadia-work-instruction-schema.json
     type: JSONSchema
   - url: examples/acadia-work-instruction-example.json
-    type: Example
-  - type: NaftikoCapability
+    type: Examples
+  - type: X-NaftikoCapability
     url: capabilities/platform-employees.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/platform-quizzes.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/platform-roles.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/platform-skills.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/platform-work-instructions.yaml
   description: Acadia Platform API provides programmatic access to digital work instructions, employee skills matrices, quizzes,
     evaluations, and knowledge management features for workforce development integrations.
@@ -53,7 +53,7 @@ common:
   url: https://www.acadia-software.com/
 - type: Portal
   url: https://www.acadia-software.com/
-- type: SignUp
+- type: Signup
   url: https://www.acadia-software.com/
 - type: Blog
   url: https://www.acadia-software.com/blog/
