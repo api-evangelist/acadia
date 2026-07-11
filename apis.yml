@@ -49,6 +49,10 @@ apis:
   description: Acadia Platform API provides programmatic access to digital work instructions, employee skills matrices, quizzes,
     evaluations, and knowledge management features for workforce development integrations.
 common:
+- type: DomainSecurity
+  url: security/acadia-domain-security.yml
+- type: Authentication
+  url: authentication/acadia-authentication.yml
 - type: Website
   url: https://www.acadia-software.com/
 - type: Portal
