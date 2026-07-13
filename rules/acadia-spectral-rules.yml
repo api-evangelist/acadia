@@ -1,243 +1,288 @@
+# acadia — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on acadia-software.com
+#   - query-params-casing: snake @ 100% (n=9)
+#   - operationid-casing: camel @ 100% (n=7)
+#   - schema-names-casing: pascal @ 100% (n=13)
+#   - schema-properties-casing: snake @ 79% (n=62)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - pagination params observed: ['limit', 'page']
+#   - merge: kept 25 existing, added 7 measured, upgraded 0
+#   - added: servers-expected-domain, query-params-casing, operationid-casing, schema-names-casing, schema-properties-casing, error-schema-defined, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
-
-  # INFO / METADATA
   info-title-acadia-prefix:
     description: Info title must start with "Acadia"
     severity: error
-    given: '$.info'
+    given: $.info
     then:
       field: title
       function: pattern
       functionOptions:
-        match: '^Acadia'
-
+        match: ^Acadia
   info-description-required:
     description: Info description must be present
     severity: error
-    given: '$.info'
+    given: $.info
     then:
       field: description
       function: truthy
-
   info-version-required:
     description: Info version must be present
     severity: error
-    given: '$.info'
+    given: $.info
     then:
       field: version
       function: truthy
-
-  # OPENAPI VERSION
   openapi-version-3:
     description: Must use OpenAPI 3.0.x
     severity: error
-    given: '$'
+    given: $
     then:
       field: openapi
       function: pattern
       functionOptions:
-        match: '^3\.0\.'
-
-  # SERVERS
+        match: ^3\.0\.
   servers-https-required:
     description: Server URLs must use HTTPS
     severity: error
-    given: '$.servers[*]'
+    given: $.servers[*]
     then:
       field: url
       function: pattern
       functionOptions:
-        match: '^https://'
-
-  # PATHS
+        match: ^https://
   paths-kebab-case:
     description: Path segments must use kebab-case
     severity: warn
-    given: '$.paths'
+    given: $.paths
     then:
       field: '@key'
       function: pattern
       functionOptions:
-        match: '^(\/[a-z0-9_\-\{\}]*)*$'
-
+        match: ^(\/[a-z0-9_\-\{\}]*)*$
   paths-no-trailing-slash:
     description: Paths must not have trailing slashes
     severity: warn
-    given: '$.paths'
+    given: $.paths
     then:
       field: '@key'
       function: pattern
       functionOptions:
-        notMatch: '.+\/$'
-
-  # OPERATIONS
+        notMatch: .+\/$
   operation-summary-prefix:
     description: Operation summaries must start with "Acadia"
     severity: warn
-    given: '$.paths[*][get,post,put,patch,delete]'
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: summary
       function: pattern
       functionOptions:
-        match: '^Acadia'
-
+        match: ^Acadia
   operation-description-required:
     description: Every operation must have a description
     severity: error
-    given: '$.paths[*][get,post,put,patch,delete]'
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: description
       function: truthy
-
   operation-id-required:
     description: Every operation must have an operationId
     severity: error
-    given: '$.paths[*][get,post,put,patch,delete]'
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: operationId
       function: truthy
-
   operation-id-camel-case:
     description: operationId must use camelCase
     severity: warn
-    given: '$.paths[*][get,post,put,patch,delete]'
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: operationId
       function: pattern
       functionOptions:
-        match: '^[a-z][a-zA-Z0-9]+$'
-
+        match: ^[a-z][a-zA-Z0-9]+$
   operation-tags-required:
     description: Every operation must have tags
     severity: error
-    given: '$.paths[*][get,post,put,patch,delete]'
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: tags
       function: truthy
-
-  # PARAMETERS
   parameter-description-required:
     description: Parameters must have descriptions
     severity: error
-    given: '$.paths[*][get,post,put,patch,delete].parameters[*]'
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
     then:
       field: description
       function: truthy
-
   parameter-pagination-page:
     description: List endpoints should support page parameter
     severity: info
-    given: '$.paths[*].get.parameters[?(@.name == "page")]'
+    given: $.paths[*].get.parameters[?(@.name == "page")]
     then:
       field: schema.type
       function: enumeration
       functionOptions:
         values:
-          - integer
-
+        - integer
   parameter-pagination-limit:
     description: List endpoints should support limit parameter
     severity: info
-    given: '$.paths[*].get.parameters[?(@.name == "limit")]'
+    given: $.paths[*].get.parameters[?(@.name == "limit")]
     then:
       field: schema.type
       function: enumeration
       functionOptions:
         values:
-          - integer
-
-  # RESPONSES
+        - integer
   response-success-required:
     description: Every operation must have a 2xx success response
     severity: error
-    given: '$.paths[*][get,post,put,patch,delete].responses'
+    given: $.paths[*][get,post,put,patch,delete].responses
     then:
       function: schema
       functionOptions:
         schema:
           anyOf:
-            - required: ['200']
-            - required: ['201']
-            - required: ['204']
-
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
   response-401-required:
     description: Protected operations should document 401 response
     severity: warn
-    given: '$.paths[*][get,post,put,patch,delete].responses'
+    given: $.paths[*][get,post,put,patch,delete].responses
     then:
       field: '401'
       function: truthy
-
   response-description-required:
     description: All responses must have descriptions
     severity: error
-    given: '$.paths[*][get,post,put,patch,delete].responses[*]'
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
     then:
       field: description
       function: truthy
-
-  # SCHEMAS
   schema-description-required:
     description: Component schemas must have descriptions
     severity: warn
-    given: '$.components.schemas[*]'
+    given: $.components.schemas[*]
     then:
       field: description
       function: truthy
-
   schema-property-description:
     description: Schema properties should have descriptions
     severity: info
-    given: '$.components.schemas[*].properties[*]'
+    given: $.components.schemas[*].properties[*]
     then:
       field: description
       function: truthy
-
   schema-property-example:
     description: Schema properties should have example values
     severity: info
-    given: '$.components.schemas[*].properties[*]'
+    given: $.components.schemas[*].properties[*]
     then:
       field: example
       function: truthy
-
-  # SECURITY
   security-schemes-required:
     description: Security schemes must be defined
     severity: error
-    given: '$'
+    given: $
     then:
       field: components.securitySchemes
       function: truthy
-
   security-bearer-jwt:
     description: Acadia uses Bearer JWT authentication
     severity: warn
-    given: '$.components.securitySchemes[*][?(@.type == "http")]'
+    given: $.components.securitySchemes[*][?(@.type == "http")]
     then:
       field: scheme
       function: enumeration
       functionOptions:
         values:
-          - bearer
-
-  # HTTP METHOD CONVENTIONS
+        - bearer
   get-no-request-body:
     description: GET operations must not have a request body
     severity: error
-    given: '$.paths[*].get'
+    given: $.paths[*].get
     then:
       field: requestBody
       function: falsy
-
   delete-returns-200-or-204:
     description: DELETE operations should return 200 or 204
     severity: warn
-    given: '$.paths[*].delete.responses'
+    given: $.paths[*].delete.responses
     then:
       function: schema
       functionOptions:
         schema:
           anyOf:
-            - required: ['200']
-            - required: ['204']
+          - required:
+            - '200'
+          - required:
+            - '204'
+  servers-expected-domain:
+    description: Server URLs should be on the acadia-software.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: acadia\-software\.com
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
