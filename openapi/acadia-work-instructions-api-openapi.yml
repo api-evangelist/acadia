@@ -1,0 +1,327 @@
+openapi: 3.0.3
+info:
+  title: Acadia - Platform Employees Work Instructions API
+  description: Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.
+  version: 1.0.0
+  contact:
+    url: https://www.acadia-software.com/
+  x-generated-from: documentation
+servers:
+- url: https://api.acadia-software.com/v1
+  description: Acadia Platform API v1
+security:
+- bearerAuth: []
+tags:
+- name: Work Instructions
+  description: Manage digital work instructions and task lists
+paths:
+  /work-instructions:
+    get:
+      operationId: listWorkInstructions
+      summary: Acadia List Work Instructions
+      description: List all digital work instructions in the organization.
+      tags:
+      - Work Instructions
+      parameters:
+      - name: status
+        in: query
+        required: false
+        description: Filter by publication status (draft, published, archived).
+        schema:
+          type: string
+          enum:
+          - draft
+          - published
+          - archived
+        example: published
+      - name: category
+        in: query
+        required: false
+        description: Filter by work instruction category or department.
+        schema:
+          type: string
+        example: safety
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination.
+        schema:
+          type: integer
+          default: 1
+        example: 1
+      - name: limit
+        in: query
+        required: false
+        description: Number of results per page (max 100).
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+        example: 25
+      responses:
+        '200':
+          description: List of work instructions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkInstructionList'
+              examples:
+                listWorkInstructions200Example:
+                  summary: Default listWorkInstructions 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: wi-abc123
+                      title: Machine Startup Procedure
+                      status: published
+                      category: operations
+                      version: 3
+                      createdAt: '2026-01-15T09:00:00Z'
+                      updatedAt: '2026-03-01T14:30:00Z'
+                    total: 1
+                    page: 1
+                    limit: 25
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createWorkInstruction
+      summary: Acadia Create Work Instruction
+      description: Create a new digital work instruction.
+      tags:
+      - Work Instructions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkInstructionRequest'
+            examples:
+              createWorkInstructionRequestExample:
+                summary: Default createWorkInstruction request
+                x-microcks-default: true
+                value:
+                  title: New Safety Procedure
+                  category: safety
+                  description: Standard safety procedure for equipment handling
+                  steps:
+                  - order: 1
+                    title: Don PPE
+                    description: Put on all required personal protective equipment
+      responses:
+        '201':
+          description: Work instruction created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkInstruction'
+              examples:
+                createWorkInstruction201Example:
+                  summary: Default createWorkInstruction 201 response
+                  x-microcks-default: true
+                  value:
+                    id: wi-def456
+                    title: New Safety Procedure
+                    status: draft
+                    category: safety
+                    version: 1
+                    createdAt: '2026-04-19T10:00:00Z'
+                    updatedAt: '2026-04-19T10:00:00Z'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /work-instructions/{id}:
+    get:
+      operationId: getWorkInstruction
+      summary: Acadia Get Work Instruction
+      description: Get details of a specific work instruction including all steps.
+      tags:
+      - Work Instructions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Work instruction identifier.
+        schema:
+          type: string
+        example: wi-abc123
+      responses:
+        '200':
+          description: Work instruction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkInstruction'
+              examples:
+                getWorkInstruction200Example:
+                  summary: Default getWorkInstruction 200 response
+                  x-microcks-default: true
+                  value:
+                    id: wi-abc123
+                    title: Machine Startup Procedure
+                    status: published
+                    category: operations
+                    version: 3
+                    description: Standard procedure for starting production machinery safely
+                    steps:
+                    - order: 1
+                      title: Inspect Machine
+                      description: Visually inspect the machine for defects or hazards
+                    - order: 2
+                      title: Clear Safety Zone
+                      description: Ensure no personnel are in the machine safety zone
+                    createdAt: '2026-01-15T09:00:00Z'
+                    updatedAt: '2026-03-01T14:30:00Z'
+        '404':
+          description: Work instruction not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WorkInstruction:
+      type: object
+      description: A digital work instruction document
+      properties:
+        id:
+          type: string
+          description: Unique work instruction identifier
+          example: wi-abc123
+        title:
+          type: string
+          description: Title of the work instruction
+          example: Machine Startup Procedure
+        status:
+          type: string
+          description: Publication status
+          example: published
+          enum:
+          - draft
+          - published
+          - archived
+        category:
+          type: string
+          description: Category or department the instruction belongs to
+          example: operations
+        version:
+          type: integer
+          description: Version number of the work instruction
+          example: 3
+        description:
+          type: string
+          description: Description of the work instruction purpose
+          example: Standard procedure for starting production machinery safely
+        steps:
+          type: array
+          description: Ordered steps in the work instruction
+          items:
+            $ref: '#/components/schemas/WorkInstructionStep'
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the instruction was created
+          example: '2026-01-15T09:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp of last update
+          example: '2026-03-01T14:30:00Z'
+    WorkInstructionStep:
+      type: object
+      description: A single step within a work instruction
+      properties:
+        order:
+          type: integer
+          description: Step sequence number
+          example: 1
+        title:
+          type: string
+          description: Step title
+          example: Inspect Machine
+        description:
+          type: string
+          description: Detailed description of the step
+          example: Visually inspect the machine for defects or hazards
+    CreateWorkInstructionRequest:
+      type: object
+      description: Request body for creating a work instruction
+      required:
+      - title
+      - category
+      properties:
+        title:
+          type: string
+          description: Title of the new work instruction
+          example: New Safety Procedure
+        category:
+          type: string
+          description: Category or department
+          example: safety
+        description:
+          type: string
+          description: Description of the instruction purpose
+          example: Standard safety procedure for equipment handling
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkInstructionStep'
+    WorkInstructionList:
+      type: object
+      description: Paginated list of work instructions
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkInstruction'
+        total:
+          type: integer
+          description: Total number of work instructions
+          example: 42
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+        limit:
+          type: integer
+          description: Results per page
+          example: 25
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer token for API authentication

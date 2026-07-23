@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: Acadia - Platform Employees Quizzes API
+  description: Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.
+  version: 1.0.0
+  contact:
+    url: https://www.acadia-software.com/
+  x-generated-from: documentation
+servers:
+- url: https://api.acadia-software.com/v1
+  description: Acadia Platform API v1
+security:
+- bearerAuth: []
+tags:
+- name: Quizzes
+  description: Manage quizzes and assessments
+paths:
+  /quizzes:
+    get:
+      operationId: listQuizzes
+      summary: Acadia List Quizzes
+      description: List all quizzes available in the platform.
+      tags:
+      - Quizzes
+      parameters:
+      - name: status
+        in: query
+        required: false
+        description: Filter by quiz status (active, inactive).
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+        example: active
+      responses:
+        '200':
+          description: List of quizzes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizList'
+              examples:
+                listQuizzes200Example:
+                  summary: Default listQuizzes 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: quiz-jkl012
+                      title: Machine Safety Knowledge Check
+                      status: active
+                      questionCount: 10
+                      passingScore: 80
+                      createdAt: '2026-01-20T10:00:00Z'
+                    total: 1
+                    page: 1
+                    limit: 25
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
+    QuizList:
+      type: object
+      description: Paginated list of quizzes
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quiz'
+        total:
+          type: integer
+          example: 15
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
+    Quiz:
+      type: object
+      description: A quiz or assessment
+      properties:
+        id:
+          type: string
+          description: Quiz identifier
+          example: quiz-jkl012
+        title:
+          type: string
+          description: Quiz title
+          example: Machine Safety Knowledge Check
+        status:
+          type: string
+          description: Quiz status
+          example: active
+          enum:
+          - active
+          - inactive
+        questionCount:
+          type: integer
+          description: Number of questions in the quiz
+          example: 10
+        passingScore:
+          type: integer
+          description: Minimum passing score percentage
+          example: 80
+        createdAt:
+          type: string
+          format: date-time
+          description: Quiz creation timestamp
+          example: '2026-01-20T10:00:00Z'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer token for API authentication
