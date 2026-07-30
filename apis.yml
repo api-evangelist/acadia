@@ -2,7 +2,20 @@ aid: acadia
 url: https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/apis.yml
 name: Acadia
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/acadia.png
 tags:
 - Connected Worker
 - Knowledge Management
@@ -18,24 +31,22 @@ created: '2024-01-15'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: acadia:acadia-api
-  name: Acadia Platform API
-  tags:
-  - Connected Worker
-  - Knowledge Management
-  - Training
-  - Workforce Development
+- aid: acadia:acadia-employees-api
+  name: Acadia Employees API
+  description: Manage employee profiles and training records
   humanURL: https://www.acadia-software.com/
   baseURL: https://api.acadia-software.com/v1
+  tags:
+  - Employees
   properties:
-  - url: https://www.acadia-software.com/
-    type: Documentation
-  - url: openapi/acadia-platform.yaml
-    type: OpenAPI
-  - url: json-schema/acadia-work-instruction-schema.json
-    type: JSONSchema
-  - url: examples/acadia-work-instruction-example.json
-    type: Examples
+  - type: OpenAPI
+    url: openapi/acadia-employees-api-openapi.yml
+  - type: Documentation
+    url: https://www.acadia-software.com/
+  - type: JSONSchema
+    url: json-schema/acadia-work-instruction-schema.json
+  - type: Examples
+    url: examples/acadia-work-instruction-example.json
   - type: X-NaftikoCapability
     url: capabilities/platform-employees.yaml
   - type: X-NaftikoCapability
@@ -46,8 +57,110 @@ apis:
     url: capabilities/platform-skills.yaml
   - type: X-NaftikoCapability
     url: capabilities/platform-work-instructions.yaml
-  description: Acadia Platform API provides programmatic access to digital work instructions, employee skills matrices, quizzes,
-    evaluations, and knowledge management features for workforce development integrations.
+- aid: acadia:acadia-quizzes-api
+  name: Acadia Quizzes API
+  description: Manage quizzes and assessments
+  humanURL: https://www.acadia-software.com/
+  baseURL: https://api.acadia-software.com/v1
+  tags:
+  - Quizzes
+  properties:
+  - type: OpenAPI
+    url: openapi/acadia-quizzes-api-openapi.yml
+  - type: Documentation
+    url: https://www.acadia-software.com/
+  - type: JSONSchema
+    url: json-schema/acadia-work-instruction-schema.json
+  - type: Examples
+    url: examples/acadia-work-instruction-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/platform-employees.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-quizzes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-roles.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-skills.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-work-instructions.yaml
+- aid: acadia:acadia-roles-api
+  name: Acadia Roles API
+  description: Manage job roles and training requirements
+  humanURL: https://www.acadia-software.com/
+  baseURL: https://api.acadia-software.com/v1
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/acadia-roles-api-openapi.yml
+  - type: Documentation
+    url: https://www.acadia-software.com/
+  - type: JSONSchema
+    url: json-schema/acadia-work-instruction-schema.json
+  - type: Examples
+    url: examples/acadia-work-instruction-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/platform-employees.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-quizzes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-roles.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-skills.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-work-instructions.yaml
+- aid: acadia:acadia-skills-api
+  name: Acadia Skills API
+  description: Manage employee skills and skills matrices
+  humanURL: https://www.acadia-software.com/
+  baseURL: https://api.acadia-software.com/v1
+  tags:
+  - Skills
+  properties:
+  - type: OpenAPI
+    url: openapi/acadia-skills-api-openapi.yml
+  - type: Documentation
+    url: https://www.acadia-software.com/
+  - type: JSONSchema
+    url: json-schema/acadia-work-instruction-schema.json
+  - type: Examples
+    url: examples/acadia-work-instruction-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/platform-employees.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-quizzes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-roles.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-skills.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-work-instructions.yaml
+- aid: acadia:acadia-work-instructions-api
+  name: Acadia Work Instructions API
+  description: Manage digital work instructions and task lists
+  humanURL: https://www.acadia-software.com/
+  baseURL: https://api.acadia-software.com/v1
+  tags:
+  - Work Instructions
+  properties:
+  - type: OpenAPI
+    url: openapi/acadia-work-instructions-api-openapi.yml
+  - type: Documentation
+    url: https://www.acadia-software.com/
+  - type: JSONSchema
+    url: json-schema/acadia-work-instruction-schema.json
+  - type: Examples
+    url: examples/acadia-work-instruction-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/platform-employees.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-quizzes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-roles.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-skills.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/platform-work-instructions.yaml
 common:
 - type: AgenticAccess
   url: agentic-access/acadia-agentic-access.yml
