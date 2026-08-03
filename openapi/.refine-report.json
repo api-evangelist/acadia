@@ -1,0 +1,22 @@
+{
+  "provider": "acadia",
+  "sources": [
+    "acadia-employees-api-openapi.yml",
+    "acadia-quizzes-api-openapi.yml",
+    "acadia-roles-api-openapi.yml",
+    "acadia-skills-api-openapi.yml",
+    "acadia-work-instructions-api-openapi.yml"
+  ],
+  "outputs": [
+    "acadia-employees-api-openapi.yml",
+    "acadia-quizzes-api-openapi.yml",
+    "acadia-roles-api-openapi.yml",
+    "acadia-skills-api-openapi.yml",
+    "acadia-work-instructions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,739 @@
+openapi: 3.0.3
+info:
+  title: Acadia - Platform API
+  description: >-
+    Acadia is a Connected Worker Platform providing digital work instructions,
+    skills matrices, quizzing, evaluations, knowledge management, and team
+    communications for frontline workforce development. This API specification
+    documents the programmatic interface for integrating with Acadia's platform
+    features.
+  version: 1.0.0
+  contact:
+    url: https://www.acadia-software.com/
+  x-generated-from: documentation
+servers:
+  - url: https://api.acadia-software.com/v1
+    description: Acadia Platform API v1
+security:
+  - bearerAuth: []
+tags:
+  - name: Work Instructions
+    description: Manage digital work instructions and task lists
+  - name: Skills
+    description: Manage employee skills and skills matrices
+  - name: Quizzes
+    description: Manage quizzes and assessments
+  - name: Evaluations
+    description: Manage structured skill evaluations
+  - name: Employees
+    description: Manage employee profiles and training records
+  - name: Roles
+    description: Manage job roles and training requirements
+paths:
+  /work-instructions:
+    get:
+      operationId: listWorkInstructions
+      summary: Acadia List Work Instructions
+      description: List all digital work instructions in the organization.
+      tags:
+        - Work Instructions
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Filter by publication status (draft, published, archived).
+          schema:
+            type: string
+            enum:
+              - draft
+              - published
+              - archived
+          example: published
+        - name: category
+          in: query
+          required: false
+          description: Filter by work instruction category or department.
+          schema:
+            type: string
+          example: safety
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+          example: 1
+        - name: limit
+          in: query
+          required: false
+          description: Number of results per page (max 100).
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+          example: 25
+      responses:
+        '200':
+          description: List of work instructions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkInstructionList'
+              examples:
+                listWorkInstructions200Example:
+                  summary: Default listWorkInstructions 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      - id: wi-abc123
+                        title: Machine Startup Procedure
+                        status: published
+                        category: operations
+                        version: 3
+                        createdAt: '2026-01-15T09:00:00Z'
+                        updatedAt: '2026-03-01T14:30:00Z'
+                    total: 1
+                    page: 1
+                    limit: 25
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createWorkInstruction
+      summary: Acadia Create Work Instruction
+      description: Create a new digital work instruction.
+      tags:
+        - Work Instructions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkInstructionRequest'
+            examples:
+              createWorkInstructionRequestExample:
+                summary: Default createWorkInstruction request
+                x-microcks-default: true
+                value:
+                  title: New Safety Procedure
+                  category: safety
+                  description: Standard safety procedure for equipment handling
+                  steps:
+                    - order: 1
+                      title: Don PPE
+                      description: Put on all required personal protective equipment
+      responses:
+        '201':
+          description: Work instruction created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkInstruction'
+              examples:
+                createWorkInstruction201Example:
+                  summary: Default createWorkInstruction 201 response
+                  x-microcks-default: true
+                  value:
+                    id: wi-def456
+                    title: New Safety Procedure
+                    status: draft
+                    category: safety
+                    version: 1
+                    createdAt: '2026-04-19T10:00:00Z'
+                    updatedAt: '2026-04-19T10:00:00Z'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /work-instructions/{id}:
+    get:
+      operationId: getWorkInstruction
+      summary: Acadia Get Work Instruction
+      description: Get details of a specific work instruction including all steps.
+      tags:
+        - Work Instructions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Work instruction identifier.
+          schema:
+            type: string
+          example: wi-abc123
+      responses:
+        '200':
+          description: Work instruction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkInstruction'
+              examples:
+                getWorkInstruction200Example:
+                  summary: Default getWorkInstruction 200 response
+                  x-microcks-default: true
+                  value:
+                    id: wi-abc123
+                    title: Machine Startup Procedure
+                    status: published
+                    category: operations
+                    version: 3
+                    description: Standard procedure for starting production machinery safely
+                    steps:
+                      - order: 1
+                        title: Inspect Machine
+                        description: Visually inspect the machine for defects or hazards
+                      - order: 2
+                        title: Clear Safety Zone
+                        description: Ensure no personnel are in the machine safety zone
+                    createdAt: '2026-01-15T09:00:00Z'
+                    updatedAt: '2026-03-01T14:30:00Z'
+        '404':
+          description: Work instruction not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /employees:
+    get:
+      operationId: listEmployees
+      summary: Acadia List Employees
+      description: List all employees in the organization with their training status.
+      tags:
+        - Employees
+      parameters:
+        - name: role_id
+          in: query
+          required: false
+          description: Filter employees by role identifier.
+          schema:
+            type: string
+          example: role-ops-001
+        - name: department
+          in: query
+          required: false
+          description: Filter employees by department name.
+          schema:
+            type: string
+          example: Production
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+          example: 1
+        - name: limit
+          in: query
+          required: false
+          description: Number of results per page.
+          schema:
+            type: integer
+            default: 25
+          example: 25
+      responses:
+        '200':
+          description: List of employees
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeList'
+              examples:
+                listEmployees200Example:
+                  summary: Default listEmployees 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      - id: emp-ghi789
+                        name: Jane Smith
+                        email: jsmith@example.com
+                        department: Production
+                        role: Machine Operator
+                        trainingCompletion: 87
+                    total: 1
+                    page: 1
+                    limit: 25
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /employees/{id}/skills:
+    get:
+      operationId: getEmployeeSkills
+      summary: Acadia Get Employee Skills
+      description: Get the skills matrix for a specific employee, showing all required and completed skills.
+      tags:
+        - Skills
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Employee identifier.
+          schema:
+            type: string
+          example: emp-ghi789
+      responses:
+        '200':
+          description: Employee skills matrix
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeSkillsMatrix'
+              examples:
+                getEmployeeSkills200Example:
+                  summary: Default getEmployeeSkills 200 response
+                  x-microcks-default: true
+                  value:
+                    employeeId: emp-ghi789
+                    employeeName: Jane Smith
+                    role: Machine Operator
+                    skills:
+                      - skillId: skill-001
+                        name: Machine Startup
+                        required: true
+                        completed: true
+                        completedAt: '2026-02-10T08:00:00Z'
+                        score: 95
+                      - skillId: skill-002
+                        name: Emergency Shutdown
+                        required: true
+                        completed: false
+                        completedAt: null
+                        score: null
+                    overallCompletion: 50
+        '404':
+          description: Employee not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /quizzes:
+    get:
+      operationId: listQuizzes
+      summary: Acadia List Quizzes
+      description: List all quizzes available in the platform.
+      tags:
+        - Quizzes
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Filter by quiz status (active, inactive).
+          schema:
+            type: string
+            enum:
+              - active
+              - inactive
+          example: active
+      responses:
+        '200':
+          description: List of quizzes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizList'
+              examples:
+                listQuizzes200Example:
+                  summary: Default listQuizzes 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      - id: quiz-jkl012
+                        title: Machine Safety Knowledge Check
+                        status: active
+                        questionCount: 10
+                        passingScore: 80
+                        createdAt: '2026-01-20T10:00:00Z'
+                    total: 1
+                    page: 1
+                    limit: 25
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /roles:
+    get:
+      operationId: listRoles
+      summary: Acadia List Roles
+      description: List all defined job roles with their training requirements.
+      tags:
+        - Roles
+      responses:
+        '200':
+          description: List of roles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleList'
+              examples:
+                listRoles200Example:
+                  summary: Default listRoles 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      - id: role-ops-001
+                        name: Machine Operator
+                        department: Production
+                        requiredTrainings: 12
+                        completionRate: 78
+                    total: 1
+                    page: 1
+                    limit: 25
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer token for API authentication
+  schemas:
+    WorkInstruction:
+      type: object
+      description: A digital work instruction document
+      properties:
+        id:
+          type: string
+          description: Unique work instruction identifier
+          example: wi-abc123
+        title:
+          type: string
+          description: Title of the work instruction
+          example: Machine Startup Procedure
+        status:
+          type: string
+          description: Publication status
+          example: published
+          enum:
+            - draft
+            - published
+            - archived
+        category:
+          type: string
+          description: Category or department the instruction belongs to
+          example: operations
+        version:
+          type: integer
+          description: Version number of the work instruction
+          example: 3
+        description:
+          type: string
+          description: Description of the work instruction purpose
+          example: Standard procedure for starting production machinery safely
+        steps:
+          type: array
+          description: Ordered steps in the work instruction
+          items:
+            $ref: '#/components/schemas/WorkInstructionStep'
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the instruction was created
+          example: '2026-01-15T09:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp of last update
+          example: '2026-03-01T14:30:00Z'
+    WorkInstructionStep:
+      type: object
+      description: A single step within a work instruction
+      properties:
+        order:
+          type: integer
+          description: Step sequence number
+          example: 1
+        title:
+          type: string
+          description: Step title
+          example: Inspect Machine
+        description:
+          type: string
+          description: Detailed description of the step
+          example: Visually inspect the machine for defects or hazards
+    WorkInstructionList:
+      type: object
+      description: Paginated list of work instructions
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkInstruction'
+        total:
+          type: integer
+          description: Total number of work instructions
+          example: 42
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+        limit:
+          type: integer
+          description: Results per page
+          example: 25
+    CreateWorkInstructionRequest:
+      type: object
+      description: Request body for creating a work instruction
+      required:
+        - title
+        - category
+      properties:
+        title:
+          type: string
+          description: Title of the new work instruction
+          example: New Safety Procedure
+        category:
+          type: string
+          description: Category or department
+          example: safety
+        description:
+          type: string
+          description: Description of the instruction purpose
+          example: Standard safety procedure for equipment handling
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkInstructionStep'
+    Employee:
+      type: object
+      description: An employee in the organization
+      properties:
+        id:
+          type: string
+          description: Unique employee identifier
+          example: emp-ghi789
+        name:
+          type: string
+          description: Employee full name
+          example: Jane Smith
+        email:
+          type: string
+          format: email
+          description: Employee email address
+          example: jsmith@example.com
+        department:
+          type: string
+          description: Department name
+          example: Production
+        role:
+          type: string
+          description: Job role name
+          example: Machine Operator
+        trainingCompletion:
+          type: integer
+          description: Overall training completion percentage
+          example: 87
+    EmployeeList:
+      type: object
+      description: Paginated list of employees
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+        total:
+          type: integer
+          example: 150
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
+    SkillRecord:
+      type: object
+      description: A skill record in the employee skills matrix
+      properties:
+        skillId:
+          type: string
+          description: Unique skill identifier
+          example: skill-001
+        name:
+          type: string
+          description: Skill name
+          example: Machine Startup
+        required:
+          type: boolean
+          description: Whether this skill is required for the role
+          example: true
+        completed:
+          type: boolean
+          description: Whether the employee has completed this skill
+          example: true
+        completedAt:
+          type: string
+          format: date-time
+          description: When the skill was completed
+          example: '2026-02-10T08:00:00Z'
+        score:
+          type: integer
+          description: Score achieved (0-100)
+          example: 95
+    EmployeeSkillsMatrix:
+      type: object
+      description: Complete skills matrix for an employee
+      properties:
+        employeeId:
+          type: string
+          description: Employee identifier
+          example: emp-ghi789
+        employeeName:
+          type: string
+          description: Employee name
+          example: Jane Smith
+        role:
+          type: string
+          description: Current job role
+          example: Machine Operator
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkillRecord'
+        overallCompletion:
+          type: integer
+          description: Overall skill completion percentage
+          example: 87
+    Quiz:
+      type: object
+      description: A quiz or assessment
+      properties:
+        id:
+          type: string
+          description: Quiz identifier
+          example: quiz-jkl012
+        title:
+          type: string
+          description: Quiz title
+          example: Machine Safety Knowledge Check
+        status:
+          type: string
+          description: Quiz status
+          example: active
+          enum:
+            - active
+            - inactive
+        questionCount:
+          type: integer
+          description: Number of questions in the quiz
+          example: 10
+        passingScore:
+          type: integer
+          description: Minimum passing score percentage
+          example: 80
+        createdAt:
+          type: string
+          format: date-time
+          description: Quiz creation timestamp
+          example: '2026-01-20T10:00:00Z'
+    QuizList:
+      type: object
+      description: Paginated list of quizzes
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quiz'
+        total:
+          type: integer
+          example: 15
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
+    Role:
+      type: object
+      description: A job role with training requirements
+      properties:
+        id:
+          type: string
+          description: Role identifier
+          example: role-ops-001
+        name:
+          type: string
+          description: Role name
+          example: Machine Operator
+        department:
+          type: string
+          description: Department the role belongs to
+          example: Production
+        requiredTrainings:
+          type: integer
+          description: Number of required training completions for the role
+          example: 12
+        completionRate:
+          type: integer
+          description: Average completion rate across employees in this role
+          example: 78
+    RoleList:
+      type: object
+      description: Paginated list of roles
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        total:
+          type: integer
+          example: 8
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
