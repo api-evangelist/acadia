@@ -47,16 +47,6 @@ apis:
     url: json-schema/acadia-work-instruction-schema.json
   - type: Examples
     url: examples/acadia-work-instruction-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/platform-employees.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-quizzes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-roles.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-skills.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-work-instructions.yaml
 - aid: acadia:acadia-quizzes-api
   name: Acadia Quizzes API
   description: Manage quizzes and assessments
@@ -73,16 +63,6 @@ apis:
     url: json-schema/acadia-work-instruction-schema.json
   - type: Examples
     url: examples/acadia-work-instruction-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/platform-employees.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-quizzes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-roles.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-skills.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-work-instructions.yaml
 - aid: acadia:acadia-roles-api
   name: Acadia Roles API
   description: Manage job roles and training requirements
@@ -99,16 +79,6 @@ apis:
     url: json-schema/acadia-work-instruction-schema.json
   - type: Examples
     url: examples/acadia-work-instruction-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/platform-employees.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-quizzes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-roles.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-skills.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-work-instructions.yaml
 - aid: acadia:acadia-skills-api
   name: Acadia Skills API
   description: Manage employee skills and skills matrices
@@ -125,16 +95,6 @@ apis:
     url: json-schema/acadia-work-instruction-schema.json
   - type: Examples
     url: examples/acadia-work-instruction-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/platform-employees.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-quizzes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-roles.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-skills.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-work-instructions.yaml
 - aid: acadia:acadia-work-instructions-api
   name: Acadia Work Instructions API
   description: Manage digital work instructions and task lists
@@ -151,16 +111,6 @@ apis:
     url: json-schema/acadia-work-instruction-schema.json
   - type: Examples
     url: examples/acadia-work-instruction-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/platform-employees.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-quizzes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-roles.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-skills.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/platform-work-instructions.yaml
 common:
 - type: AgenticAccess
   url: agentic-access/acadia-agentic-access.yml
