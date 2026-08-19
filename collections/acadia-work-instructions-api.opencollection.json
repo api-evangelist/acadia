@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Acadia - Platform Employees Work Instructions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Work Instructions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Acadia List Work Instructions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.acadia-software.com/v1/work-instructions",
+            "params": [
+              {
+                "name": "status",
+                "value": "published",
+                "type": "query",
+                "description": "Filter by publication status (draft, published, archived)."
+              },
+              {
+                "name": "category",
+                "value": "safety",
+                "type": "query",
+                "description": "Filter by work instruction category or department."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "25",
+                "type": "query",
+                "description": "Number of results per page (max 100)."
+              }
+            ]
+          },
+          "docs": "List all digital work instructions in the organization."
+        },
+        {
+          "info": {
+            "name": "Acadia Create Work Instruction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.acadia-software.com/v1/work-instructions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new digital work instruction."
+        },
+        {
+          "info": {
+            "name": "Acadia Get Work Instruction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.acadia-software.com/v1/work-instructions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "wi-abc123",
+                "type": "path",
+                "description": "Work instruction identifier."
+              }
+            ]
+          },
+          "docs": "Get details of a specific work instruction including all steps."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

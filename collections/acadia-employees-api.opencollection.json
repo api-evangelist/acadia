@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Acadia - Platform Employees API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Acadia List Employees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.acadia-software.com/v1/employees",
+            "params": [
+              {
+                "name": "role_id",
+                "value": "role-ops-001",
+                "type": "query",
+                "description": "Filter employees by role identifier."
+              },
+              {
+                "name": "department",
+                "value": "Production",
+                "type": "query",
+                "description": "Filter employees by department name."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "25",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "List all employees in the organization with their training status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

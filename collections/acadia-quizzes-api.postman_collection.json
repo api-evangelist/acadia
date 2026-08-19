@@ -1,0 +1,179 @@
+{
+  "item": [
+    {
+      "id": "bb20d3bf-3c06-47bc-81e3-7a0a801807c9",
+      "name": "Quizzes",
+      "description": {
+        "content": "Manage quizzes and assessments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55bbbfb1-7d8b-492e-afce-2364c161f46c",
+          "name": "Acadia List Quizzes",
+          "request": {
+            "name": "Acadia List Quizzes",
+            "description": {
+              "content": "List all quizzes available in the platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quizzes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by quiz status (active, inactive)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ca42b1d-b9b2-40ad-b255-3700efebbab4",
+              "name": "List of quizzes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quizzes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"quiz-jkl012\",\n      \"title\": \"Machine Safety Knowledge Check\",\n      \"status\": \"active\",\n      \"questionCount\": 10,\n      \"passingScore\": 80,\n      \"createdAt\": \"2026-01-20T10:00:00Z\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"limit\": 25\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9938c31-bc36-4639-8b73-2bb83e5301b2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quizzes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized - invalid or expired token\",\n  \"error\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.acadia-software.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "88be8b2f-70e6-4adb-804e-7c5260c1c43b",
+    "name": "Acadia - Platform Employees Quizzes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.",
+      "type": "text/plain"
+    }
+  }
+}

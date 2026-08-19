@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Acadia - Platform Employees Skills API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Skills",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Acadia Get Employee Skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.acadia-software.com/v1/employees/:id/skills",
+            "params": [
+              {
+                "name": "id",
+                "value": "emp-ghi789",
+                "type": "path",
+                "description": "Employee identifier."
+              }
+            ]
+          },
+          "docs": "Get the skills matrix for a specific employee, showing all required and completed skills."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

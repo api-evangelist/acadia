@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Acadia - Platform Employees Quizzes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quizzes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Acadia List Quizzes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.acadia-software.com/v1/quizzes",
+            "params": [
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filter by quiz status (active, inactive)."
+              }
+            ]
+          },
+          "docs": "List all quizzes available in the platform."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

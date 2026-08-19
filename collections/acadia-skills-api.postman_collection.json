@@ -1,0 +1,192 @@
+{
+  "item": [
+    {
+      "id": "53ad61bc-0ef9-4f12-b88a-728d1cbba96a",
+      "name": "Skills",
+      "description": {
+        "content": "Manage employee skills and skills matrices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "681b7ec6-8f9d-411b-adf0-ac5b6262339a",
+          "name": "Acadia Get Employee Skills",
+          "request": {
+            "name": "Acadia Get Employee Skills",
+            "description": {
+              "content": "Get the skills matrix for a specific employee, showing all required and completed skills.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "skills"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Employee identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4234c65-2d01-4887-9db8-9d3861e3053b",
+              "name": "Employee skills matrix",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "skills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Employee identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"employeeId\": \"emp-ghi789\",\n  \"employeeName\": \"Jane Smith\",\n  \"role\": \"Machine Operator\",\n  \"skills\": [\n    {\n      \"skillId\": \"skill-001\",\n      \"name\": \"Machine Startup\",\n      \"required\": true,\n      \"completed\": true,\n      \"completedAt\": \"2026-02-10T08:00:00Z\",\n      \"score\": 95\n    },\n    {\n      \"skillId\": \"skill-002\",\n      \"name\": \"Emergency Shutdown\",\n      \"required\": true,\n      \"completed\": false,\n      \"completedAt\": null,\n      \"score\": null\n    }\n  ],\n  \"overallCompletion\": 50\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e97386b6-64b9-4f45-b02b-e1c8d3481ef6",
+              "name": "Employee not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "skills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Employee identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized - invalid or expired token\",\n  \"error\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.acadia-software.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bfddbfe1-979f-4266-b0f0-7d5385413fac",
+    "name": "Acadia - Platform Employees Skills API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,570 @@
+{
+  "item": [
+    {
+      "id": "ae239ddb-7ee8-4c2a-9b45-b2418e473e83",
+      "name": "Work Instructions",
+      "description": {
+        "content": "Manage digital work instructions and task lists",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f759f71-85a7-4541-8f6b-a22529f693d1",
+          "name": "Acadia List Work Instructions",
+          "request": {
+            "name": "Acadia List Work Instructions",
+            "description": {
+              "content": "List all digital work instructions in the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "work-instructions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by publication status (draft, published, archived)."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Filter by work instruction category or department."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of results per page (max 100)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61e2d8d4-9cf3-449a-baa7-340c03e7fa00",
+              "name": "List of work instructions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "published"
+                    },
+                    {
+                      "key": "category",
+                      "value": "safety"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"wi-abc123\",\n      \"title\": \"Machine Startup Procedure\",\n      \"status\": \"published\",\n      \"category\": \"operations\",\n      \"version\": 3,\n      \"createdAt\": \"2026-01-15T09:00:00Z\",\n      \"updatedAt\": \"2026-03-01T14:30:00Z\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"limit\": 25\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cd42cd3-6363-4707-b3ca-0c4f7dd245fe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "published"
+                    },
+                    {
+                      "key": "category",
+                      "value": "safety"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized - invalid or expired token\",\n  \"error\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f44da89d-9e51-4913-be7f-467dfcfd0651",
+          "name": "Acadia Create Work Instruction",
+          "request": {
+            "name": "Acadia Create Work Instruction",
+            "description": {
+              "content": "Create a new digital work instruction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "work-instructions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"category\": \"<string>\",\n  \"description\": \"<string>\",\n  \"steps\": [\n    {\n      \"order\": \"<integer>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"order\": \"<integer>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae02e8fc-b591-4b3c-9b1c-19349bf7ade5",
+              "name": "Work instruction created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"New Safety Procedure\",\n  \"category\": \"safety\",\n  \"description\": \"Standard safety procedure for equipment handling\",\n  \"steps\": [\n    {\n      \"order\": 1,\n      \"title\": \"Don PPE\",\n      \"description\": \"Put on all required personal protective equipment\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"wi-def456\",\n  \"title\": \"New Safety Procedure\",\n  \"status\": \"draft\",\n  \"category\": \"safety\",\n  \"version\": 1,\n  \"createdAt\": \"2026-04-19T10:00:00Z\",\n  \"updatedAt\": \"2026-04-19T10:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9c756e5-5ab6-4a24-85f1-56a9e7eba0d8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"New Safety Procedure\",\n  \"category\": \"safety\",\n  \"description\": \"Standard safety procedure for equipment handling\",\n  \"steps\": [\n    {\n      \"order\": 1,\n      \"title\": \"Don PPE\",\n      \"description\": \"Put on all required personal protective equipment\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized - invalid or expired token\",\n  \"error\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3667cead-211f-4477-b27a-9ba623a9bbf4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"New Safety Procedure\",\n  \"category\": \"safety\",\n  \"description\": \"Standard safety procedure for equipment handling\",\n  \"steps\": [\n    {\n      \"order\": 1,\n      \"title\": \"Don PPE\",\n      \"description\": \"Put on all required personal protective equipment\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized - invalid or expired token\",\n  \"error\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "289fab0a-284c-4e34-a6b0-39a4534296c0",
+          "name": "Acadia Get Work Instruction",
+          "request": {
+            "name": "Acadia Get Work Instruction",
+            "description": {
+              "content": "Get details of a specific work instruction including all steps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "work-instructions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Work instruction identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53836781-15ce-4aba-89ad-8dff93670272",
+              "name": "Work instruction details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-instructions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Work instruction identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"wi-abc123\",\n  \"title\": \"Machine Startup Procedure\",\n  \"status\": \"published\",\n  \"category\": \"operations\",\n  \"version\": 3,\n  \"description\": \"Standard procedure for starting production machinery safely\",\n  \"steps\": [\n    {\n      \"order\": 1,\n      \"title\": \"Inspect Machine\",\n      \"description\": \"Visually inspect the machine for defects or hazards\"\n    },\n    {\n      \"order\": 2,\n      \"title\": \"Clear Safety Zone\",\n      \"description\": \"Ensure no personnel are in the machine safety zone\"\n    }\n  ],\n  \"createdAt\": \"2026-01-15T09:00:00Z\",\n  \"updatedAt\": \"2026-03-01T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5b5c32d-8e67-4d41-a8fe-b65be4c36ad5",
+              "name": "Work instruction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-instructions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Work instruction identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized - invalid or expired token\",\n  \"error\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.acadia-software.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "01ebeafd-aa20-442a-9909-74276eb65f1a",
+    "name": "Acadia - Platform Employees Work Instructions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.",
+      "type": "text/plain"
+    }
+  }
+}
