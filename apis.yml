@@ -29,7 +29,7 @@ description: Acadia is a Connected Worker Platform designed for employee product
   IoT, and credentialing systems to enable enterprise-grade workforce development at scale.
 created: '2024-01-15'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: acadia:acadia-employees-api
   name: Acadia Employees API
