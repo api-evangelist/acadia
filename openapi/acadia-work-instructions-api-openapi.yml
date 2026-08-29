@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Acadia - Platform Employees Work Instructions API
   description: Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.
@@ -201,6 +201,45 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    WorkInstructionStep:
+      type: object
+      description: A single step within a work instruction
+      properties:
+        order:
+          type: integer
+          description: Step sequence number
+          example: 1
+        title:
+          type: string
+          description: Step title
+          example: Inspect Machine
+        description:
+          type: string
+          description: Detailed description of the step
+          example: Visually inspect the machine for defects or hazards
+    CreateWorkInstructionRequest:
+      type: object
+      description: Request body for creating a work instruction
+      required:
+      - title
+      - category
+      properties:
+        title:
+          type: string
+          description: Title of the new work instruction
+          example: New Safety Procedure
+        category:
+          type: string
+          description: Category or department
+          example: safety
+        description:
+          type: string
+          description: Description of the instruction purpose
+          example: Standard safety procedure for equipment handling
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkInstructionStep'
     WorkInstruction:
       type: object
       description: A digital work instruction document
@@ -248,45 +287,6 @@ components:
           format: date-time
           description: Timestamp of last update
           example: '2026-03-01T14:30:00Z'
-    WorkInstructionStep:
-      type: object
-      description: A single step within a work instruction
-      properties:
-        order:
-          type: integer
-          description: Step sequence number
-          example: 1
-        title:
-          type: string
-          description: Step title
-          example: Inspect Machine
-        description:
-          type: string
-          description: Detailed description of the step
-          example: Visually inspect the machine for defects or hazards
-    CreateWorkInstructionRequest:
-      type: object
-      description: Request body for creating a work instruction
-      required:
-      - title
-      - category
-      properties:
-        title:
-          type: string
-          description: Title of the new work instruction
-          example: New Safety Procedure
-        category:
-          type: string
-          description: Category or department
-          example: safety
-        description:
-          type: string
-          description: Description of the instruction purpose
-          example: Standard safety procedure for equipment handling
-        steps:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkInstructionStep'
     WorkInstructionList:
       type: object
       description: Paginated list of work instructions

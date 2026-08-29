@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Acadia - Platform Employees Roles API
   description: Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.
@@ -54,23 +54,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RoleList:
+    ErrorResponse:
       type: object
-      description: Paginated list of roles
+      description: Error response
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        total:
-          type: integer
-          example: 8
-        page:
-          type: integer
-          example: 1
-        limit:
-          type: integer
-          example: 25
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
     Role:
       type: object
       description: A job role with training requirements
@@ -95,18 +90,23 @@ components:
           type: integer
           description: Average completion rate across employees in this role
           example: 78
-    ErrorResponse:
+    RoleList:
       type: object
-      description: Error response
+      description: Paginated list of roles
       properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Unauthorized - invalid or expired token
-        error:
-          type: string
-          description: Error code
-          example: unauthorized
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        total:
+          type: integer
+          example: 8
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
   securitySchemes:
     bearerAuth:
       type: http

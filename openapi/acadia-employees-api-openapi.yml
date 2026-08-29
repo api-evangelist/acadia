@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Acadia - Platform Employees API
   description: Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.
@@ -86,6 +86,35 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    EmployeeList:
+      type: object
+      description: Paginated list of employees
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+        total:
+          type: integer
+          example: 150
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
     Employee:
       type: object
       description: An employee in the organization
@@ -115,35 +144,6 @@ components:
           type: integer
           description: Overall training completion percentage
           example: 87
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Unauthorized - invalid or expired token
-        error:
-          type: string
-          description: Error code
-          example: unauthorized
-    EmployeeList:
-      type: object
-      description: Paginated list of employees
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Employee'
-        total:
-          type: integer
-          example: 150
-        page:
-          type: integer
-          example: 1
-        limit:
-          type: integer
-          example: 25
   securitySchemes:
     bearerAuth:
       type: http
