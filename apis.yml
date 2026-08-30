@@ -131,6 +131,11 @@ apis:
   - type: Examples
     url: examples/acadia-work-instruction-example.json
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/epicor/
+  name: Epicor
+  x-relationship: acquired
+  x-evidence: "Acadia is a Connected Worker Platform designed for employee productivity, acquired by Epicor. It delivers digital work instructions, knowledge management, skills matrices, quizzing, process evaluations, and team communications to frontline "
 - type: AgenticAccess
   url: agentic-access/acadia-agentic-access.yml
 - type: DomainSecurity
