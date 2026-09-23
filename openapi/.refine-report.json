@@ -1,11 +1,7 @@
 {
   "provider": "acadia",
   "sources": [
-    "acadia-employees-api-openapi.yml",
-    "acadia-quizzes-api-openapi.yml",
-    "acadia-roles-api-openapi.yml",
-    "acadia-skills-api-openapi.yml",
-    "acadia-work-instructions-api-openapi.yml"
+    "_ae-authored/acadia-platform.yaml"
   ],
   "outputs": [
     "acadia-employees-api-openapi.yml",
@@ -18,7 +14,15 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "acadia-platform.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "acadia-employees-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acadia-quizzes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acadia-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acadia-skills-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acadia-work-instructions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

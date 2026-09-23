@@ -86,23 +86,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EmployeeList:
-      type: object
-      description: Paginated list of employees
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Employee'
-        total:
-          type: integer
-          example: 150
-        page:
-          type: integer
-          example: 1
-        limit:
-          type: integer
-          example: 25
     ErrorResponse:
       type: object
       description: Error response
@@ -144,6 +127,23 @@ components:
           type: integer
           description: Overall training completion percentage
           example: 87
+    EmployeeList:
+      type: object
+      description: Paginated list of employees
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+        total:
+          type: integer
+          example: 150
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
   securitySchemes:
     bearerAuth:
       type: http

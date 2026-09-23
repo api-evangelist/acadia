@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Acadia - Platform Employees Quizzes API
+  title: Acadia - Platform Quizzes API
   description: Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.
   version: 1.0.0
   contact:
@@ -66,23 +66,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    QuizList:
+    ErrorResponse:
       type: object
-      description: Paginated list of quizzes
+      description: Error response
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quiz'
-        total:
-          type: integer
-          example: 15
-        page:
-          type: integer
-          example: 1
-        limit:
-          type: integer
-          example: 25
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
     Quiz:
       type: object
       description: A quiz or assessment
@@ -115,18 +110,23 @@ components:
           format: date-time
           description: Quiz creation timestamp
           example: '2026-01-20T10:00:00Z'
-    ErrorResponse:
+    QuizList:
       type: object
-      description: Error response
+      description: Paginated list of quizzes
       properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Unauthorized - invalid or expired token
-        error:
-          type: string
-          description: Error code
-          example: unauthorized
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quiz'
+        total:
+          type: integer
+          example: 15
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
   securitySchemes:
     bearerAuth:
       type: http

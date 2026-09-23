@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Acadia - Platform Employees Skills API
+  title: Acadia - Platform Skills API
   description: Acadia is a Connected Worker Platform providing digital work instructions, skills matrices, quizzing, evaluations, knowledge management, and team communications for frontline workforce development. This API specification documents the programmatic interface for integrating with Acadia's platform features.
   version: 1.0.0
   contact:
@@ -70,6 +70,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
     EmployeeSkillsMatrix:
       type: object
       description: Complete skills matrix for an employee
@@ -94,18 +106,6 @@ components:
           type: integer
           description: Overall skill completion percentage
           example: 87
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Unauthorized - invalid or expired token
-        error:
-          type: string
-          description: Error code
-          example: unauthorized
     SkillRecord:
       type: object
       description: A skill record in the employee skills matrix
