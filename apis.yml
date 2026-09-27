@@ -31,7 +31,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/acadia.png
 tags:
 - Connected Worker
-- Knowledge-Management
+- Knowledge Management
 - Manufacturing
 - Skills Management
 - Training
@@ -43,6 +43,7 @@ tags_raw:
 - Skills Management
 - Training
 - Workforce Development
+- Knowledge-Management
 description: Acadia is a Connected Worker Platform designed for employee productivity, acquired by Epicor. It delivers digital
   work instructions, knowledge management, skills matrices, quizzing, process evaluations, and team communications to frontline
   workers across manufacturing, transportation, healthcare, and retail banking. Acadia integrates with SSO, ERP, HRIS, LMS,
