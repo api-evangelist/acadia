@@ -66,35 +66,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    QuizList:
-      type: object
-      description: Paginated list of quizzes
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quiz'
-        total:
-          type: integer
-          example: 15
-        page:
-          type: integer
-          example: 1
-        limit:
-          type: integer
-          example: 25
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Unauthorized - invalid or expired token
-        error:
-          type: string
-          description: Error code
-          example: unauthorized
     Quiz:
       type: object
       description: A quiz or assessment
@@ -127,6 +98,35 @@ components:
           format: date-time
           description: Quiz creation timestamp
           example: '2026-01-20T10:00:00Z'
+    QuizList:
+      type: object
+      description: Paginated list of quizzes
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quiz'
+        total:
+          type: integer
+          example: 15
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
   securitySchemes:
     bearerAuth:
       type: http

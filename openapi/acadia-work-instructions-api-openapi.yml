@@ -201,18 +201,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Unauthorized - invalid or expired token
-        error:
-          type: string
-          description: Error code
-          example: unauthorized
     WorkInstructionList:
       type: object
       description: Paginated list of work instructions
@@ -233,45 +221,6 @@ components:
           type: integer
           description: Results per page
           example: 25
-    CreateWorkInstructionRequest:
-      type: object
-      description: Request body for creating a work instruction
-      required:
-      - title
-      - category
-      properties:
-        title:
-          type: string
-          description: Title of the new work instruction
-          example: New Safety Procedure
-        category:
-          type: string
-          description: Category or department
-          example: safety
-        description:
-          type: string
-          description: Description of the instruction purpose
-          example: Standard safety procedure for equipment handling
-        steps:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkInstructionStep'
-    WorkInstructionStep:
-      type: object
-      description: A single step within a work instruction
-      properties:
-        order:
-          type: integer
-          description: Step sequence number
-          example: 1
-        title:
-          type: string
-          description: Step title
-          example: Inspect Machine
-        description:
-          type: string
-          description: Detailed description of the step
-          example: Visually inspect the machine for defects or hazards
     WorkInstruction:
       type: object
       description: A digital work instruction document
@@ -319,6 +268,57 @@ components:
           format: date-time
           description: Timestamp of last update
           example: '2026-03-01T14:30:00Z'
+    WorkInstructionStep:
+      type: object
+      description: A single step within a work instruction
+      properties:
+        order:
+          type: integer
+          description: Step sequence number
+          example: 1
+        title:
+          type: string
+          description: Step title
+          example: Inspect Machine
+        description:
+          type: string
+          description: Detailed description of the step
+          example: Visually inspect the machine for defects or hazards
+    CreateWorkInstructionRequest:
+      type: object
+      description: Request body for creating a work instruction
+      required:
+      - title
+      - category
+      properties:
+        title:
+          type: string
+          description: Title of the new work instruction
+          example: New Safety Procedure
+        category:
+          type: string
+          description: Category or department
+          example: safety
+        description:
+          type: string
+          description: Description of the instruction purpose
+          example: Standard safety procedure for equipment handling
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkInstructionStep'
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
   securitySchemes:
     bearerAuth:
       type: http
