@@ -99,18 +99,6 @@ components:
           type: integer
           description: Score achieved (0-100)
           example: 95
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Unauthorized - invalid or expired token
-        error:
-          type: string
-          description: Error code
-          example: unauthorized
     EmployeeSkillsMatrix:
       type: object
       description: Complete skills matrix for an employee
@@ -135,6 +123,18 @@ components:
           type: integer
           description: Overall skill completion percentage
           example: 87
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
   securitySchemes:
     bearerAuth:
       type: http
