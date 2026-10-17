@@ -201,6 +201,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateWorkInstructionRequest:
+      type: object
+      description: Request body for creating a work instruction
+      required:
+      - title
+      - category
+      properties:
+        title:
+          type: string
+          description: Title of the new work instruction
+          example: New Safety Procedure
+        category:
+          type: string
+          description: Category or department
+          example: safety
+        description:
+          type: string
+          description: Description of the instruction purpose
+          example: Standard safety procedure for equipment handling
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkInstructionStep'
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Unauthorized - invalid or expired token
+        error:
+          type: string
+          description: Error code
+          example: unauthorized
     WorkInstruction:
       type: object
       description: A digital work instruction document
@@ -248,57 +283,6 @@ components:
           format: date-time
           description: Timestamp of last update
           example: '2026-03-01T14:30:00Z'
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Unauthorized - invalid or expired token
-        error:
-          type: string
-          description: Error code
-          example: unauthorized
-    CreateWorkInstructionRequest:
-      type: object
-      description: Request body for creating a work instruction
-      required:
-      - title
-      - category
-      properties:
-        title:
-          type: string
-          description: Title of the new work instruction
-          example: New Safety Procedure
-        category:
-          type: string
-          description: Category or department
-          example: safety
-        description:
-          type: string
-          description: Description of the instruction purpose
-          example: Standard safety procedure for equipment handling
-        steps:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkInstructionStep'
-    WorkInstructionStep:
-      type: object
-      description: A single step within a work instruction
-      properties:
-        order:
-          type: integer
-          description: Step sequence number
-          example: 1
-        title:
-          type: string
-          description: Step title
-          example: Inspect Machine
-        description:
-          type: string
-          description: Detailed description of the step
-          example: Visually inspect the machine for defects or hazards
     WorkInstructionList:
       type: object
       description: Paginated list of work instructions
@@ -319,6 +303,22 @@ components:
           type: integer
           description: Results per page
           example: 25
+    WorkInstructionStep:
+      type: object
+      description: A single step within a work instruction
+      properties:
+        order:
+          type: integer
+          description: Step sequence number
+          example: 1
+        title:
+          type: string
+          description: Step title
+          example: Inspect Machine
+        description:
+          type: string
+          description: Detailed description of the step
+          example: Visually inspect the machine for defects or hazards
   securitySchemes:
     bearerAuth:
       type: http

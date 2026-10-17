@@ -54,6 +54,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RoleList:
+      type: object
+      description: Paginated list of roles
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        total:
+          type: integer
+          example: 8
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 25
     Role:
       type: object
       description: A job role with training requirements
@@ -90,23 +107,6 @@ components:
           type: string
           description: Error code
           example: unauthorized
-    RoleList:
-      type: object
-      description: Paginated list of roles
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        total:
-          type: integer
-          example: 8
-        page:
-          type: integer
-          example: 1
-        limit:
-          type: integer
-          example: 25
   securitySchemes:
     bearerAuth:
       type: http
