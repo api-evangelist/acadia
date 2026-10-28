@@ -1,4 +1,4 @@
-# Acadia (acadia)
+# Acadia
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,160 +66,189 @@
 
 Acadia is a Connected Worker Platform designed for employee productivity, acquired by Epicor. It delivers digital work instructions, knowledge management, skills matrices, quizzing, process evaluations, and team communications to frontline workers across manufacturing, transportation, healthcare, and retail banking. Acadia integrates with SSO, ERP, HRIS, LMS, IoT, and credentialing systems to enable enterprise-grade workforce development at scale.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/acadia/refs/heads/main/apis.yml)
+**Areas:** Connected Worker · Knowledge Management · Manufacturing · Skills Management · Training · Workforce Development
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Acadia on APIs.io
 
-## Tags:
+Everything profiled for Acadia is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/acadia/](https://apis.io/providers/acadia/)** — or go straight to one of the APIs or properties below.
 
- - Connected Worker, Knowledge Management, Manufacturing, Skills Management, Training, Workforce Development
+### APIs (5)
 
-## Timestamps
+- [Acadia Employees API](https://apis.io/apis/acadia/acadia-employees-api/) — Manage employee profiles and training records
+- [Acadia Quizzes API](https://apis.io/apis/acadia/acadia-quizzes-api/) — Manage quizzes and assessments
+- [Acadia Roles API](https://apis.io/apis/acadia/acadia-roles-api/) — Manage job roles and training requirements
+- [Acadia Skills API](https://apis.io/apis/acadia/acadia-skills-api/) — Manage employee skills and skills matrices
+- [Acadia Work Instructions API](https://apis.io/apis/acadia/acadia-work-instructions-api/) — Manage digital work instructions and task lists
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Acadia Platform API
-Acadia Platform API provides programmatic access to digital work instructions, employee skills matrices, quizzes, evaluations, and knowledge management features for workforce development integrations.
+#### Agentic access (1)
 
-**Human URL:** [https://www.acadia-software.com/](https://www.acadia-software.com/)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags:
+- [Acadia Agentic Access](https://apis.io/agentic-access/acadia/acadia-agentic-access/)
 
- - Connected Worker, Knowledge Management, Training, Workforce Development
+#### JSON Schema (11)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://www.acadia-software.com/)
-- [OpenAPI](openapi/acadia-platform.yaml)
-- [JSONSchema](json-schema/acadia-work-instruction-schema.json)
-- [Example](examples/acadia-work-instruction-example.json)
+- [Employee](https://apis.io/schemas/acadia/acadia-employee/)
+- [EmployeeList](https://apis.io/schemas/acadia/acadia-employee-list/)
+- [EmployeeSkillsMatrix](https://apis.io/schemas/acadia/acadia-employee-skills-matrix/)
+- [Quiz](https://apis.io/schemas/acadia/acadia-quiz/)
+- [QuizList](https://apis.io/schemas/acadia/acadia-quiz-list/)
+- [Role](https://apis.io/schemas/acadia/acadia-role/)
+- [RoleList](https://apis.io/schemas/acadia/acadia-role-list/)
+- [SkillRecord](https://apis.io/schemas/acadia/acadia-skill-record/)
+- [WorkInstruction](https://apis.io/schemas/acadia/acadia-work-instruction/)
+- [WorkInstructionList](https://apis.io/schemas/acadia/acadia-work-instruction-list/)
+- [WorkInstructionStep](https://apis.io/schemas/acadia/acadia-work-instruction-step/)
 
-## Common Properties
+#### JSON Structure (11)
+
+Data models expressed in JSON Structure.
+
+- [Acadia Employee List Structure](https://apis.io/json-structure/acadia/acadia-employee-list-structure/)
+- [Acadia Employee Skills Matrix Structure](https://apis.io/json-structure/acadia/acadia-employee-skills-matrix-structure/)
+- [Acadia Employee Structure](https://apis.io/json-structure/acadia/acadia-employee-structure/)
+- [Acadia Quiz List Structure](https://apis.io/json-structure/acadia/acadia-quiz-list-structure/)
+- [Acadia Quiz Structure](https://apis.io/json-structure/acadia/acadia-quiz-structure/)
+- [Acadia Role List Structure](https://apis.io/json-structure/acadia/acadia-role-list-structure/)
+- [Acadia Role Structure](https://apis.io/json-structure/acadia/acadia-role-structure/)
+- [Acadia Skill Record Structure](https://apis.io/json-structure/acadia/acadia-skill-record-structure/)
+- [Acadia Work Instruction List Structure](https://apis.io/json-structure/acadia/acadia-work-instruction-list-structure/)
+- [Acadia Work Instruction Step Structure](https://apis.io/json-structure/acadia/acadia-work-instruction-step-structure/)
+- [Acadia Work Instruction Structure](https://apis.io/json-structure/acadia/acadia-work-instruction-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Acadia Platform Context](https://apis.io/jsonld/acadia/acadia-platform-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Acadia Vocabulary](https://apis.io/vocabularies/acadia/acadia-vocabulary/)
+
+#### Examples (11)
+
+Example requests and responses.
+
+- [Acadia Employee Example](https://apis.io/examples/acadia/acadia-employee-example/)
+- [Acadia Employee List Example](https://apis.io/examples/acadia/acadia-employee-list-example/)
+- [Acadia Employee Skills Matrix Example](https://apis.io/examples/acadia/acadia-employee-skills-matrix-example/)
+- [Acadia Quiz Example](https://apis.io/examples/acadia/acadia-quiz-example/)
+- [Acadia Quiz List Example](https://apis.io/examples/acadia/acadia-quiz-list-example/)
+- [Acadia Role Example](https://apis.io/examples/acadia/acadia-role-example/)
+- [Acadia Role List Example](https://apis.io/examples/acadia/acadia-role-list-example/)
+- [Acadia Skill Record Example](https://apis.io/examples/acadia/acadia-skill-record-example/)
+- [Acadia Work Instruction Example](https://apis.io/examples/acadia/acadia-work-instruction-example/)
+- [Acadia Work Instruction List Example](https://apis.io/examples/acadia/acadia-work-instruction-list-example/)
+- [Acadia Work Instruction Step Example](https://apis.io/examples/acadia/acadia-work-instruction-step-example/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Acadia - Platform Employees API](https://apis.io/collections/acadia/open-acadia-employees-api/)
+- [Acadia - Platform Employees Quizzes API](https://apis.io/collections/acadia/open-acadia-quizzes-api/)
+- [Acadia - Platform Employees Roles API](https://apis.io/collections/acadia/open-acadia-roles-api/)
+- [Acadia - Platform Employees Skills API](https://apis.io/collections/acadia/open-acadia-skills-api/)
+- [Acadia - Platform Employees Work Instructions API](https://apis.io/collections/acadia/open-acadia-work-instructions-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Acadia — jsonschema rules](https://apis.io/rules/acadia/acadia-jsonschema-spectral-rules/)
+- [Acadia API Rules](https://apis.io/rules/acadia/acadia-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Acadia Authentication](https://apis.io/security/acadia/acadia-authentication/)
+- [Acadia Domain Security](https://apis.io/security/acadia/acadia-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Acadia Plans Pricing](https://apis.io/plans/acadia/acadia-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Acadia Rate Limits](https://apis.io/rate-limits/acadia/acadia-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Acadia Finops](https://apis.io/finops/acadia/acadia-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.acadia-software.com/)
-- [Portal](https://www.acadia-software.com/)
-- [SignUp](https://www.acadia-software.com/)
-- [Blog](https://www.acadia-software.com/blog/)
 - [Documentation](https://www.acadia-software.com/features/)
-- [SpectralRules](rules/acadia-spectral-rules.yml)
-- [NaftikoCapability](capabilities/workforce-development.yaml)
-- [Vocabulary](vocabulary/acadia-vocabulary.yaml)
+- [Blog](https://www.acadia-software.com/blog/)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Digital Work Instructions | Convert procedures to interactive task lists with videos, images, and dynamic content; assign via QR code, ERP integration, or manager distribution |
-| Knowledge Management | Centralized document creation with automated translation, algorithmic search, and custom metadata filters |
-| Skills Matrix | Track training and skill attainment, quantify individual and team performance, and identify capability gaps |
-| Quizzing and Evaluations | Assess employee skill proficiency, measure comprehension, and perform objective skill evaluations during task execution |
-| Team Communications | Auditable acknowledgements for process changes, group communications, and document change tracking |
-| SSO Integration | Secure single sign-on via Active Directory and LDAP with role-based access control |
-| ERP and HRIS Integration | Integration with ERP, HRIS, LMS, IoT, and credentialing systems for enterprise workforce management |
-| SOC 2 Type II Certified | Enterprise-grade security with multi-layer encryption, intrusion prevention, and GDPR compliance |
-| Career Path Visibility | Display advancement requirements and skill gap identification for employee career development |
+**Kin Score 26.9** — thin · rubric 0.24.0 · scored 2026-10-17
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 28.1 |
+| Contract governance | 27.3 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 18.4 |
 
-| Name | Description |
-|------|-------------|
-| Manufacturing Workforce Onboarding | Use digital work instructions to onboard new manufacturing employees quickly and ensure procedure compliance |
-| Compliance Training | Assign and track completion of compliance-critical training and policy acknowledgements with full auditability |
-| Frontline Skill Gap Analysis | Use the skills matrix to identify capability gaps in frontline teams and prioritize training investments |
-| Process Improvement Feedback | Capture structured employee feedback on task-specific procedures to improve standard work over time |
-| ERP-Triggered Work Instructions | Automatically assign work instructions based on ERP work orders for synchronized production operations |
-| Multi-Language Training Deployment | Deploy synchronized multi-language training content to global workforces without manual translation delays |
+**Agent readiness 28.7** — agent-ready
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-| Name | Description |
-|------|-------------|
-| SAP | Integration with SAP ERP for work order-triggered digital work instruction assignment |
-| Active Directory | Single sign-on via Microsoft Active Directory for enterprise identity management |
-| LDAP | LDAP-based SSO for enterprise authentication systems |
-| Learning Management Systems | Integration with third-party LMS platforms for training record synchronization |
-| HRIS Systems | Integration with HR information systems for employee data synchronization |
-| IoT Platforms | Integration with IoT systems for operational data correlation with training and task execution |
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/acadia/](https://apis.io/providers/acadia/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Acadia Platform](openapi/acadia-platform.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Acadia: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [Acadia Employee List Schema](json-schema/acadia-employee-list-schema.json)
-- [Acadia Employee Schema](json-schema/acadia-employee-schema.json)
-- [Acadia Employee Skills Matrix Schema](json-schema/acadia-employee-skills-matrix-schema.json)
-- [Acadia Quiz List Schema](json-schema/acadia-quiz-list-schema.json)
-- [Acadia Quiz Schema](json-schema/acadia-quiz-schema.json)
-- [Acadia Role List Schema](json-schema/acadia-role-list-schema.json)
-- [Acadia Role Schema](json-schema/acadia-role-schema.json)
-- [Acadia Skill Record Schema](json-schema/acadia-skill-record-schema.json)
-- [Acadia Work Instruction List Schema](json-schema/acadia-work-instruction-list-schema.json)
-- [Acadia Work Instruction Schema](json-schema/acadia-work-instruction-schema.json)
-- [Acadia Work Instruction Step Schema](json-schema/acadia-work-instruction-step-schema.json)
-
-### JSON Structure
-
-- [Acadia Employee List Structure](json-structure/acadia-employee-list-structure.json)
-- [Acadia Employee Skills Matrix Structure](json-structure/acadia-employee-skills-matrix-structure.json)
-- [Acadia Employee Structure](json-structure/acadia-employee-structure.json)
-- [Acadia Quiz List Structure](json-structure/acadia-quiz-list-structure.json)
-- [Acadia Quiz Structure](json-structure/acadia-quiz-structure.json)
-- [Acadia Role List Structure](json-structure/acadia-role-list-structure.json)
-- [Acadia Role Structure](json-structure/acadia-role-structure.json)
-- [Acadia Skill Record Structure](json-structure/acadia-skill-record-structure.json)
-- [Acadia Work Instruction List Structure](json-structure/acadia-work-instruction-list-structure.json)
-- [Acadia Work Instruction Step Structure](json-structure/acadia-work-instruction-step-structure.json)
-- [Acadia Work Instruction Structure](json-structure/acadia-work-instruction-structure.json)
-
-### JSON-LD
-
-- [Acadia Platform Context](json-ld/acadia-platform-context.jsonld)
-
-### Examples
-
-- [Acadia Employee Example](examples/acadia-employee-example.json)
-- [Acadia Employee List Example](examples/acadia-employee-list-example.json)
-- [Acadia Employee Skills Matrix Example](examples/acadia-employee-skills-matrix-example.json)
-- [Acadia Quiz Example](examples/acadia-quiz-example.json)
-- [Acadia Quiz List Example](examples/acadia-quiz-list-example.json)
-- [Acadia Role Example](examples/acadia-role-example.json)
-- [Acadia Role List Example](examples/acadia-role-list-example.json)
-- [Acadia Skill Record Example](examples/acadia-skill-record-example.json)
-- [Acadia Work Instruction Example](examples/acadia-work-instruction-example.json)
-- [Acadia Work Instruction List Example](examples/acadia-work-instruction-list-example.json)
-- [Acadia Work Instruction Step Example](examples/acadia-work-instruction-step-example.json)
-
-## Capabilities
-
-Naftiko capabilities for Acadia Connected Worker Platform.
-
-### Shared Per-API Definitions
-
-- [Acadia Platform](capabilities/shared/acadia-platform.yaml)
-
-### Workflow Capabilities
-
-- [Workforce Development](capabilities/workforce-development.yaml)
-
-## Vocabulary
-
-- [Acadia Vocabulary](vocabulary/acadia-vocabulary.yaml) — Unified taxonomy mapping 6 resources, 3 actions, 1 workflow, and 3 personas
-
-## Rules
-
-- [Acadia Spectral Rules](rules/acadia-spectral-rules.yml) — 25 rules enforcing Acadia API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/acadia/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
