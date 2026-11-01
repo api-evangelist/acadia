@@ -1,0 +1,71 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Acadia
+providerId: acadia
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: generated
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Connected Worker
+  - Knowledge Management
+  - Manufacturing
+  - Skills Management
+  - Training
+  - Workforce Development
+description: Acadia is a connected-worker platform (digital work instructions, skills matrices, quizzing,
+  evaluations) acquired by Epicor. Pricing is quote-based and not published; engagement is through "Book
+  a Demo" and direct sales contact. The Acadia Platform API is enabled per enterprise contract rather
+  than via a self-service plan tier.
+sources:
+  - https://www.acadia-software.com/
+notes: No public pricing page. Acadia (Epicor) sells via consultative sales; per-API quotas, seat counts,
+  and prices are negotiated per contract. Reconciled flag is false because no published price points exist
+  to map into entries.
+plans:
+  - id: acadia-enterprise
+    name: Enterprise (Contact Sales)
+    type: enterprise
+    description: Quote-based enterprise pricing for the Acadia connected-worker platform and platform
+      API. Includes digital work instructions, skills matrices, quizzing, integrations (SSO/ERP/HRIS/LMS/IoT),
+      and the Acadia Platform API.
+    entries:
+      - label: Enterprise contract
+        name: enterprise_contract
+        type: subscription
+        metric: contract
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+    elements:
+      - name: Digital work instructions
+      - name: Skills matrix
+      - name: Quizzing and evaluations
+      - name: Knowledge management
+      - name: SSO / ERP / HRIS / LMS / IoT integrations
+      - name: Platform API access
+maintainers:
+  - FN: Kin Lane
+    email: info@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - negotiated
+  plans:
+  - name: Enterprise (Contact Sales)
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
